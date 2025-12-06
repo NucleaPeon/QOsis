@@ -1,0 +1,24 @@
+#ifndef QOSIS_GUI_VERSION_H
+#define QOSIS_GUI_VERSION_H
+
+// Compiler accessible definitions
+
+#define QOSIS_GUI_VERSION_RELEASE "@PROJECT_VERSION_MAJOR@"
+#define QOSIS_GUI_VERSION_MAJOR "@PROJECT_VERSION_MINOR@"
+#define QOSIS_GUI_VERSION_MINOR "@PROJECT_VERSION_PATCH@"
+#define QOSIS_GUI_VERSION_PATCH "@PROJECT_VERSION_TWEAK@"
+
+// Program accessible definitions
+
+namespace QOSIS {
+    namespace GUI {
+        namespace Version {
+            const int RELEASE = @PROJECT_VERSION_MAJOR@;
+            const int MAJOR = @PROJECT_VERSION_MINOR@;
+            const int MINOR = @PROJECT_VERSION_PATCH@;
+            const int PATCH = @PROJECT_VERSION_TWEAK@;
+        }
+    }
+}
+
+#endif // QOSIS_GUI_VERSION_H

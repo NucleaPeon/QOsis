@@ -4,35 +4,24 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = QOsis
-TEMPLATE = app
-
-
-SOURCES += main.cpp\
+OTHER_FILES = main.cpp\
         mainwindow.cpp\
         about.cpp\
-        preferences.cpp
-
-HEADERS  += mainwindow.h\
+        preferences.cpp\
+        mainwindow.h\
         about.h\
-        preferences.h
-
-macx { 
-
-    LIBS += -framework Cocoa
-
-    QT += macextras
-
-    OBJECTIVE_SOURCES += cocoainitializer.mm
-    OBJECTIVE_HEADERS += cocoainitializer.h
-
-}
-
-
-FORMS    += mainwindow.ui\
+        preferences.h\
+        cocoainitializer.mm\
+        cocoainitializer.h\
+        mainwindow.ui\
         about.ui\
-        preferences.ui
+        preferences.ui\
+        CMakeLists.txt\
+        lib/CMakeLists.txt\
+        gui/CMakeLists.txt\
+        cli/CMakeLists.txt\
+        lib/version.h.in\
+        gui/version.h.in\
+        cli/version.h.in\
+        version.h.in\
+        README.md
