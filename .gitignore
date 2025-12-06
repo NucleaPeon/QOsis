@@ -1,5 +1,10 @@
 CMakeFiles/
-build/
+*/build/
 *.app/
 *_autogen/
-
+*/CMakeFiles/
+*.app/
+Makefile
+*.tcl
+CMakeCache.txt
+*.cmake

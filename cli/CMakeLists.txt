@@ -5,11 +5,8 @@ project(qosis-cli
         DESCRIPTION "OSIS (Open Scriptural Information Standard™) Command Line Interface"
 )
 
-include(GNUInstallDirs)  # REQUIRED TO INSTALL PKGCONFIG TO PROPER DIR!
-include(CTest)
-
 message(STATUS "Building OSIS CLI...")
 
 # Immediately set the version.h header
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in
-    ${CMAKE_CURRENT_SOURCE_DIR}/version.h @ONLY)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/version.h.in
+    ${CMAKE_CURRENT_LIST_DIR}/version.h @ONLY)
