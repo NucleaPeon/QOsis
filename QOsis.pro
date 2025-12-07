@@ -18,9 +18,11 @@ OTHER_FILES = gui/src/main.cpp\
         gui/src/preferences.ui\
         CMakeLists.txt\
         lib/CMakeLists.txt\
-        gui/CMakeLists.txt\
-        cli/CMakeLists.txt\
         lib/version.h.in\
+        gui/CMakeLists.txt\
         gui/version.h.in\
+        cli/CMakeLists.txt\
         cli/version.h.in\
+        tests/CMakeLists.txt\
+        tests/test_runner.cpp\
         README.md

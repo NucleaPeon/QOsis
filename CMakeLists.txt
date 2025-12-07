@@ -26,6 +26,7 @@ set(ONLY_GUI OFF CACHE BOOL "Build only the OSIS GUI component")
 
 if(BUILD_LIBRARY)
     list(APPEND QOSIS_BUILDS lib)
+    list(APPEND QOSIS_BUILDS tests)
     message(STATUS "APPENDING LIBRARY")
 endif()
 
@@ -77,6 +78,7 @@ else()
         lib
         cli
         gui
+        tests
     )
 endif()
 

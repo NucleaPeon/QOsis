@@ -8,3 +8,4 @@ Makefile
 *.tcl
 CMakeCache.txt
 *.cmake
+qosis-*
