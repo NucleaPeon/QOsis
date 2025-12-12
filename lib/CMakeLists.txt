@@ -11,7 +11,7 @@ message(STATUS "${CMAKE_CXX_COMPILER} C++ Compiler")
 
 # Immediately set the version.h header
 configure_file(${CMAKE_CURRENT_LIST_DIR}/version.h.in
-    ${CMAKE_CURRENT_LIST_DIR}/version.h @ONLY)
+    ${CMAKE_CURRENT_LIST_DIR}/src/version.h @ONLY)
 
 
 find_package(Qt5 REQUIRED
@@ -20,15 +20,18 @@ find_package(Qt5 REQUIRED
 )
 
 set(PACKAGE_HEADERS
-  qosis.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosis.h
 )
 
 list(APPEND QOSIS_HEADERS
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosis.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosis_global.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/version.h
 )
 
 
 list(APPEND QOSIS_SOURCES
-        src/qt5menugen.cpp
+#        src/qosis.cpp
 )
 
 add_library(${PROJECT_NAME}
@@ -45,7 +48,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION}
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${QOSIS_HEADERS}")
-configure_file(src/qosis.pc.in src/qosis.pc @ONLY)
 
 install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -59,14 +61,15 @@ set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
     CACHE PATH "Location of header files" )
 set(SYSCONFIG_INSTALL_DIR ${CMAKE_INSTALL_SYSCONFDIR}/${PROJECT_NAME}
     CACHE PATH "Location of configuration files" )
-configure_package_config_file(${PROJECT_NAME}-config.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
+configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake.in
+  ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake
   INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
   PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR)
 write_basic_package_version_file(
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
   VERSION ${VERSION}
   COMPATIBILITY SameMajorVersion )
+configure_file(${CMAKE_CURRENT_LIST_DIR}/qosis.pc.in ${CMAKE_CURRENT_LIST_DIR}/qosis.pc @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME} )

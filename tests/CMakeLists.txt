@@ -14,6 +14,7 @@ project(qosis-tests
 include(GNUInstallDirs)
 
 list(APPEND TEST_SOURCES
+
 )
 
 list(APPEND TEST_HEADERS

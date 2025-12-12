@@ -1,3 +1,4 @@
+*.pro.user
 CMakeFiles/
 */build/
 *.app/
@@ -8,4 +9,6 @@ Makefile
 *.tcl
 CMakeCache.txt
 *.cmake
-qosis-*
+*.dylib
+*.in
+*/build/*
