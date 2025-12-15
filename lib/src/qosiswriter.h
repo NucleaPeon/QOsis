@@ -5,7 +5,9 @@
 #include <QtCore/QXmlStreamReader>
 #include <QtCore/QXmlStreamWriter>
 
-class QOsisWriter {
+#include "qosiscommons.h"
+
+class QOsisWriter : public QOsisCommons {
 public:
     explicit QOsisWriter();
     QOsisWriter(const QString path);

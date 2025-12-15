@@ -26,6 +26,7 @@ set(CMAKE_AUTORCC ON)
 
 
 list(APPEND TEST_SOURCES
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_validator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_exporter.cpp
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_importer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_reader.cpp
@@ -34,6 +35,7 @@ list(APPEND TEST_SOURCES
 )
 
 list(APPEND TEST_HEADERS
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_validator.h
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_exporter.h
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_importer.h
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_reader.h

@@ -1,13 +1,14 @@
 #include "qosiswriter.h"
 
 
-QOsisWriter::QOsisWriter()
+QOsisWriter::QOsisWriter() :
+    QOsisCommons("")
 {
 
 }
 
 QOsisWriter::QOsisWriter(const QString path) :
-    _path(path)
+    QOsisCommons(path)
 {
 
 }

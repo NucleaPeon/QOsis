@@ -7,14 +7,11 @@
 
 #include "qosiscommons.h"
 
-class QOsisValidator : QOsisCommons {
+class QOsisValidator : public QOsisCommons {
 public:
     explicit QOsisValidator();
     QOsisValidator(const QString path);
     ~QOsisValidator();
-
-private:
-    QString _path = NULL;
 
 };
 

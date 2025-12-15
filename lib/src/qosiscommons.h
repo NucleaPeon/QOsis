@@ -9,9 +9,9 @@ class QOsisCommons {
 public:
     QOsisCommons(const QString path);
     const QString path();
+    bool isValidPath();
 
 private:
-    bool isValidPath();
     QString _path = NULL;
 };
 

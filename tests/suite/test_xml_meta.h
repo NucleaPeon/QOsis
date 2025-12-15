@@ -4,6 +4,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
+
 #include <qosis.h>
 
 class TestXmlMeta : public QObject {
