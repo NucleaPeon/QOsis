@@ -1,0 +1,4 @@
+#ifndef QOSIS_TEST_IMPORTER_H
+#define QOSIS_TEST_IMPORTER_H
+
+#endif

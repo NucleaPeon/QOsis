@@ -1,3 +1,4 @@
+qosis-tests
 *.pro.user
 CMakeFiles/
 */build/

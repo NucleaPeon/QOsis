@@ -19,10 +19,39 @@ OTHER_FILES = gui/src/main.cpp\
         CMakeLists.txt\
         lib/CMakeLists.txt\
         lib/version.h.in\
+        lib/qosis.pc.in\
+        lib/src/qosis.h\
+        lib/src/qosis.cpp\
+        lib/src/qosisreader.h\
+        lib/src/qosisreader.cpp\
+        lib/src/qosiswriter.h\
+        lib/src/qosiswriter.cpp\
+        lib/src/qosisexporter.h\
+        lib/src/qosisexporter.cpp\
+        lib/src/qosisimporter.h\
+        lib/src/qosisimporter.cpp\
+        lib/src/qosisvalidator.h\
+        lib/src/qosisvalidator.cpp\
+        lib/src/qosiscommons.h\
+        lib/src/qosiscommons.cpp\
+        lib/src/qosis_global.h\
+        lib/src/version.h\
         gui/CMakeLists.txt\
         gui/version.h.in\
         cli/CMakeLists.txt\
         cli/version.h.in\
         tests/CMakeLists.txt\
         tests/test_runner.cpp\
+        tests/suite/test_xml_reader.cpp\
+        tests/suite/test_xml_reader.h\
+        tests/suite/test_xml_writer.cpp\
+        tests/suite/test_xml_writer.h\
+        tests/suite/test_xml_meta.cpp\
+        tests/suite/test_xml_meta.h\
+        tests/suite/test_xml_importer.cpp\
+        tests/suite/test_xml_importer.h\
+        tests/suite/test_xml_exporter.cpp\
+        tests/suite/test_xml_exporter.h\
+        tests/suite/test_xml_validator.cpp\
+        tests/suite/test_xml_validator.h\
         README.md

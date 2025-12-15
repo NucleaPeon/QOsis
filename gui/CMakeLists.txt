@@ -9,6 +9,10 @@ project(qosis-gui
 include(GNUInstallDirs)  # REQUIRED TO INSTALL PKGCONFIG TO PROPER DIR!
 include(CTest)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
 message(STATUS "Building OSIS GUI in ${CMAKE_CURRENT_LIST_DIR}...")
 
 # Immediately set the version.h header
@@ -35,6 +39,9 @@ list(APPEND APP_UIS
 list(APPEND APP_RES)
 
 list(APPEND APP_OTHER)
+
+#find_package(qosis CONFIG REQUIRED 0.0.0.1)
+#target_link_libraries(${PROJECT_NAME} qosis)
 
 if (APPLE)
     set(APP_ICON "${MACOSX_BUNDLE_ICON_FILE}")

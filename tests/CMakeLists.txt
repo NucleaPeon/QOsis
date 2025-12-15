@@ -13,17 +13,38 @@ project(qosis-tests
 
 include(GNUInstallDirs)
 
-list(APPEND TEST_SOURCES
 
+find_package(Qt5 REQUIRED
+    Core
+    Xml
+    Test
+)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+
+list(APPEND TEST_SOURCES
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_exporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_importer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_reader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_writer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_meta.cpp
 )
 
 list(APPEND TEST_HEADERS
-
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_exporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_importer.h
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_reader.h
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_writer.h
+    ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_meta.h
 )
 
 list(APPEND TEST_OTHER
 
 )
+
 
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_LIST_DIR}/test_runner.cpp
@@ -33,6 +54,12 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Xml Qt5::Test)
+include_directories(BEFORE ${CMAKE_CURRENT_LIST_DIR}/../lib/src)
+target_link_libraries(${PROJECT_NAME} qosis)
+
+# Uncomment this once we can detect whether package is found and if not, use relative paths instead.
+
+#find_package(qosis CONFIG REQUIRED 0.0.0.1)
 
 #if(APPLE)
 #        find_package(Qt5 REQUIRED MacExtras)

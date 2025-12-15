@@ -53,9 +53,7 @@ endif()
 
 
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
+
 
 ### DEPENDENCIES ###
 
@@ -68,9 +66,9 @@ find_package(Qt5 REQUIRED
 )
 
 # If no declaratives are set, we build everything. Determine if something is set
+
 set(QOSIS_BUILD_LEN 0)
 list(LENGTH QOSIS_BUILDS QOSIS_BUILD_LEN)
-
 if(${QOSIS_BUILD_LEN} GREATER 0)
     message(STATUS "There is something defined in QOSIS_BUILDS ${QOSIS_BUILDS}")
 else()
@@ -81,8 +79,6 @@ else()
         tests
     )
 endif()
-
-
 
 foreach(QOSIS_BUILD_TYPE IN LISTS QOSIS_BUILDS)
     message(STATUS "Building project component ${QOSIS_BUILD_TYPE}")

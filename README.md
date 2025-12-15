@@ -56,3 +56,9 @@ Additional Notes:
 * ``BUILD_`` declaratives will be appended to a list of projects to be built.
     Can be specified multiple times, not sure why you'd want to.
 
+
+LEFT OFF NOTES
+==============
+
+[ ] Projects that depend on the library should attempt to import and if they fail, attempt to include relative
+    paths to get access to the code we need.
