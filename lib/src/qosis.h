@@ -13,6 +13,8 @@
 
 using namespace QOSIS::Library::Version;
 
+class QOsisReader;
+
 /*!
  * \brief The QOsis class is the meta OSIS class that handles all areas of osis file work
  *

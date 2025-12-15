@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>qosis-testfile.xml</file>
+    </qresource>
+</RCC>
+

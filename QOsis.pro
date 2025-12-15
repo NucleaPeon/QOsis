@@ -54,4 +54,6 @@ OTHER_FILES = gui/src/main.cpp\
         tests/suite/test_xml_exporter.h\
         tests/suite/test_xml_validator.cpp\
         tests/suite/test_xml_validator.h\
+        tests/qosis-testfile.xml\
+        tests/qosis-files.qrc\
         README.md

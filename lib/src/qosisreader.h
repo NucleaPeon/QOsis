@@ -5,6 +5,9 @@
 #include <QtCore/QXmlStreamReader>
 #include <QtCore/QXmlStreamWriter>
 
+#include <QtCore/QByteArray>
+#include <QtCore/QFile>
+
 #include "qosiscommons.h"
 
 class QOsisReader : public QOsisCommons {
@@ -13,6 +16,9 @@ public:
     QOsisReader(const QString path);
     ~QOsisReader();
 
+    QByteArray read();
+
+private:
 };
 
 #endif

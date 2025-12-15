@@ -44,7 +44,8 @@ list(APPEND TEST_HEADERS
 )
 
 list(APPEND TEST_OTHER
-
+    ${CMAKE_CURRENT_LIST_DIR}/qosis-testfile.xml
+    ${CMAKE_CURRENT_LIST_DIR}/qosis-files.qrc
 )
 
 

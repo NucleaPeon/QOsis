@@ -8,11 +8,19 @@
 
 #include <qosis.h>
 
+static const QString TEST_FILE = "://qosis-testfile.xml";
+
 class TestXmlReader : public QObject {
 
     Q_OBJECT
+public:
 
 private slots:
+    void initTestCase();
+    void testConstructors();
+    void testReadingFile();
+    void cleanupTestCase();
+
 private:
     QOsis *meta;
 };

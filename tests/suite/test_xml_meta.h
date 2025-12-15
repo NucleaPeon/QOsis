@@ -14,7 +14,6 @@ class TestXmlMeta : public QObject {
 private slots:
     void initTestCase();
     void testGetters();
-
     void cleanupTestCase();
 
 private:

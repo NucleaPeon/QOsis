@@ -6,6 +6,7 @@
 #include <QtCore/QXmlStreamWriter>
 
 #include "qosiscommons.h"
+#include "qosisreader.h"
 
 class QOsisValidator : public QOsisCommons {
 public:
@@ -13,6 +14,8 @@ public:
     QOsisValidator(const QString path);
     ~QOsisValidator();
 
+private:
+    QOsisReader *reader;
 };
 
 #endif // QOSISVALIDATOR_H
