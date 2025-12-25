@@ -8,6 +8,8 @@
 
 #include <qosis.h>
 
+using namespace QOSIS;
+
 static const QString TEST_FILE = "://qosis-testfile.xml";
 
 class TestXmlReader : public QObject {

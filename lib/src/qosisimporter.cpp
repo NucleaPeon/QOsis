@@ -1,5 +1,7 @@
 #include "qosisimporter.h"
 
+using namespace QOSIS;
+
 QOsisImporter::QOsisImporter() :
     QOsisCommons("")
 {

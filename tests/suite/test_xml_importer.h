@@ -8,6 +8,8 @@
 
 #include <qosis.h>
 
+using namespace QOSIS;
+
 class TestXmlImporter : public QObject {
 
     Q_OBJECT

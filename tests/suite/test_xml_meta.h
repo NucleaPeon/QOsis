@@ -7,6 +7,8 @@
 
 #include <qosis.h>
 
+using namespace QOSIS;
+
 class TestXmlMeta : public QObject {
 
     Q_OBJECT

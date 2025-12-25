@@ -8,6 +8,8 @@
 
 #include <qosis.h>
 
+using namespace QOSIS;
+
 class TestXmlWriter : public QObject {
 
     Q_OBJECT

@@ -7,6 +7,10 @@
 
 #include "qosiscommons.h"
 
+using namespace QOSIS;
+
+namespace QOSIS {
+
 class QOsisWriter : public QOsisCommons {
 public:
     explicit QOsisWriter();
@@ -16,5 +20,7 @@ public:
 private:
     QString _path = NULL;
 };
+
+}
 
 #endif

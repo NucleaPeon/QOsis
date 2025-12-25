@@ -10,6 +10,8 @@
 
 #include "qosiscommons.h"
 
+namespace QOSIS {
+
 class QOsisReader : public QOsisCommons {
 public:
     explicit QOsisReader();
@@ -20,5 +22,7 @@ public:
 
 private:
 };
+
+}
 
 #endif

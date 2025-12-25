@@ -4,8 +4,15 @@
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
+#include <QtCore/QUrl>
+
+#include <QtXmlPatterns/QXmlSchemaValidator>
+#include <QtXmlPatterns/QXmlSchema>
 
 #include <qosis.h>
+
+using namespace QOSIS;
+using namespace QOSIS::Globals;
 
 class TestXmlValidator: public QObject {
 
@@ -13,7 +20,8 @@ class TestXmlValidator: public QObject {
 
 private slots:
     void initTestCase();
-    void testNothing();
+    void testOnlineSchemaValidation();
+    void testSchemaValidation();
     void cleanupTestCase();
 
 private:

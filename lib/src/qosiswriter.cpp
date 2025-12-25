@@ -1,6 +1,7 @@
 #include "qosiswriter.h"
 
 
+
 QOsisWriter::QOsisWriter() :
     QOsisCommons("")
 {

@@ -8,6 +8,8 @@
 #include <QtCore/QFile>
 #include <QtCore/QDir>
 
+namespace QOSIS {
+
 class QOsisCommons {
 public:
     QOsisCommons(const QString path);
@@ -21,5 +23,7 @@ private:
     QString _path = NULL;
     QFile* _file;
 };
+
+}
 
 #endif

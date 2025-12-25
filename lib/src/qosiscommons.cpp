@@ -1,6 +1,8 @@
 #include "qosiscommons.h"
 #include <QtCore/QDebug>
 
+using namespace QOSIS;
+
 QOsisCommons::QOsisCommons(const QString path)
 {
     this->setPath(path);

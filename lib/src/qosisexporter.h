@@ -7,6 +7,8 @@
 
 #include "qosiscommons.h"
 
+namespace QOSIS {
+
 class QOsisExporter : public QOsisCommons {
 public:
     explicit QOsisExporter();
@@ -14,5 +16,7 @@ public:
     ~QOsisExporter();
 
 };
+
+}
 
 #endif

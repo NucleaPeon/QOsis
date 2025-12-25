@@ -17,6 +17,7 @@ include(GNUInstallDirs)
 find_package(Qt5 REQUIRED
     Core
     Xml
+    XmlPatterns
     Test
 )
 
@@ -56,7 +57,7 @@ add_executable(${PROJECT_NAME}
     ${TEST_SOURCES}
 )
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Xml Qt5::Test)
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Xml Qt5::XmlPatterns Qt5::Test)
 include_directories(BEFORE ${CMAKE_CURRENT_LIST_DIR}/../lib/src)
 target_link_libraries(${PROJECT_NAME} qosis)
 

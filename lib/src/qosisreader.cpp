@@ -1,5 +1,8 @@
 #include "qosisreader.h"
 #include <QtCore/QDebug>
+
+using namespace QOSIS;
+
 QOsisReader::QOsisReader() :
     QOsisCommons("")
 {
