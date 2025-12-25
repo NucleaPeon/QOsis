@@ -56,6 +56,13 @@ Additional Notes:
 * ``BUILD_`` declaratives will be appended to a list of projects to be built.
     Can be specified multiple times, not sure why you'd want to.
 
+Testing
+=======
+
+Due to the xml xsd url not being valid anymore, we modify the kjv.xml file to use local file
+'osisCore.2.1.1.xsd' for testing only, although if its absence prevents us from utilitizing
+said xml files, we'll have to modify them (automatically?) to use local xsd.
+
 
 LEFT OFF NOTES
 ==============

@@ -3,6 +3,7 @@
     <qresource prefix="/">
         <file>qosis-testfile.xml</file>
         <file>kjv.xml</file>
+        <file>osisCore.2.1.1.xsd</file>
     </qresource>
 </RCC>
 

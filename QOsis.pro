@@ -57,4 +57,5 @@ OTHER_FILES = gui/src/main.cpp\
         tests/qosis-testfile.xml\
         tests/qosis-files.qrc\
         tests/kjv.xml\
+        tests/osisCore.2.1.1.xsd\
         README.md

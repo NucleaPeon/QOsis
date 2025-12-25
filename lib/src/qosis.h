@@ -32,6 +32,8 @@ namespace Validation {
 }
 
 namespace Globals {
+    // DEV NOTE: This address is no longer in use and is only used as it is defined by the standard.
+    // We use a downloaded xsd version to validate the schema.
     const static char* XML_NAMESPACE = "http://www.bibltechnolgologies.net/OSIS/osisCore.2.1.xsd";
 }
 

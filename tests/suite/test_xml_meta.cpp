@@ -21,7 +21,6 @@ void TestXmlMeta::testGetters()
     QVERIFY(! this->meta->exporter()->isValidPath());
     QVERIFY(! this->meta->importer()->isValidPath());
     this->meta->setPath("://qosis-testfile.xml");
-    qDebug() << this->meta->path() << this->meta->isValidPath();
     QVERIFY(this->meta->isValidPath());
 }
 

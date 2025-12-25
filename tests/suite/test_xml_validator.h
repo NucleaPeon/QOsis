@@ -1,10 +1,12 @@
 #ifndef QOSIS_TEST_VALIDATOR_H
 #define QOSIS_TEST_VALIDATOR_H
 
+#include <QtCore/QCoreApplication>
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
 #include <QtCore/QUrl>
+#include <QtCore/QBuffer>
 
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtXmlPatterns/QXmlSchema>
@@ -20,12 +22,12 @@ class TestXmlValidator: public QObject {
 
 private slots:
     void initTestCase();
-    void testOnlineSchemaValidation();
     void testSchemaValidation();
     void cleanupTestCase();
 
 private:
     QOsis *meta;
+    QCoreApplication *app;
 };
 
 
