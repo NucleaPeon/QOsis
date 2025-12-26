@@ -1,5 +1,7 @@
 #include "qosisvalidator.h"
 
+using namespace QOSIS;
+
 QOsisValidator::QOsisValidator() :
     QOsisCommons("")
 {

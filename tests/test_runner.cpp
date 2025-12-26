@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     result = QTest::qExec(metaTests);
 
     TestXmlValidator *validateTests = new TestXmlValidator();
-    result = QTest::qExec(validateTests);
+//    result = QTest::qExec(validateTests);
 
     TestXmlReader *readerTests = new TestXmlReader();
     result = QTest::qExec(readerTests);

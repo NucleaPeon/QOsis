@@ -6,7 +6,7 @@
 #define QOSIS_LIBRARY_VERSION_RELEASE "0"
 #define QOSIS_LIBRARY_VERSION_MAJOR "0"
 #define QOSIS_LIBRARY_VERSION_MINOR "1"
-#define QOSIS_LIBRARY_VERSION_PATCH "0"
+#define QOSIS_LIBRARY_VERSION_PATCH "1"
 
 // Program accessible definitions
 
@@ -16,7 +16,7 @@ namespace QOSIS {
             const int RELEASE = 0;
             const int MAJOR = 0;
             const int MINOR = 1;
-            const int PATCH = 0;
+            const int PATCH = 1;
         }
     }
 }

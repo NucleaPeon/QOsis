@@ -27,3 +27,5 @@ QByteArray QOsisReader::read()
     f->close();
     return arr;
 }
+
+

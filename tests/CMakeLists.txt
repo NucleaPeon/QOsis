@@ -6,7 +6,7 @@ if (APPLE)
 endif()
 
 project(qosis-tests
-        VERSION 0.0.0.1
+        VERSION 0.0.1.0
         LANGUAGES C CXX
         DESCRIPTION "Tests for ensuring quality of the osis format library"
 )

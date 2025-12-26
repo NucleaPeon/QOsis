@@ -22,6 +22,9 @@ OTHER_FILES = gui/src/main.cpp\
         lib/qosis.pc.in\
         lib/src/qosis.h\
         lib/src/qosis.cpp\
+        lib/src/qosismeta.h\
+        lib/src/qosisglobals.h\
+        lib/src/qosismeta.cpp\
         lib/src/qosisreader.h\
         lib/src/qosisreader.cpp\
         lib/src/qosiswriter.h\

@@ -1,9 +1,6 @@
 #ifndef QOSISEXPORTER_H
 #define QOSISEXPORTER_H
 
-#include <QtXmlPatterns/QXmlSchemaValidator>
-#include <QtCore/QXmlStreamReader>
-#include <QtCore/QXmlStreamWriter>
 
 #include "qosiscommons.h"
 

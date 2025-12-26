@@ -20,7 +20,7 @@ void TestXmlMeta::testGetters()
     QVERIFY(! this->meta->writer()->isValidPath());
     QVERIFY(! this->meta->exporter()->isValidPath());
     QVERIFY(! this->meta->importer()->isValidPath());
-    this->meta->setPath("://qosis-testfile.xml");
+    this->meta->setPath("://kjv.xml");
     QVERIFY(this->meta->isValidPath());
 }
 

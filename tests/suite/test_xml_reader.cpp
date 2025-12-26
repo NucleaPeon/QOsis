@@ -11,9 +11,9 @@ void TestXmlReader::testConstructors()
     QOsisReader* reader = new QOsisReader("");
     QVERIFY(! reader->isValidPath());
     reader = NULL;
-    reader = new QOsisReader("://qosis-testfile.xml");
+    reader = new QOsisReader(TEST_FILE);
     QVERIFY(reader->isValidPath());
-    reader = NULL;
+    delete reader;
 }
 
 void TestXmlReader::testReadingFile()
@@ -22,8 +22,7 @@ void TestXmlReader::testReadingFile()
     QOsisReader* reader = new QOsisReader(TEST_FILE);
     QByteArray data = reader->read();
     QVERIFY(! data.isEmpty());
-    reader = NULL;
-    qDebug() << data;
+    delete reader;
 }
 
 void TestXmlReader::cleanupTestCase()

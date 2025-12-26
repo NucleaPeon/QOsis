@@ -10,7 +10,7 @@
 
 using namespace QOSIS;
 
-static const QString TEST_FILE = "://qosis-testfile.xml";
+static const QString TEST_FILE = "://kjv.xml";
 
 class TestXmlReader : public QObject {
 

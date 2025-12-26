@@ -1,12 +1,11 @@
 #ifndef QOSISCOMMONS_H
 #define QOSISCOMMONS_H
 
-#include <QtXmlPatterns/QXmlSchemaValidator>
-#include <QtCore/QXmlStreamReader>
-#include <QtCore/QXmlStreamWriter>
-
 #include <QtCore/QFile>
 #include <QtCore/QDir>
+#include <QtCore/QString>
+
+#include "qosisglobals.h"
 
 namespace QOSIS {
 
@@ -25,5 +24,6 @@ private:
 };
 
 }
+
 
 #endif

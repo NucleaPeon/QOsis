@@ -1,17 +1,13 @@
 #ifndef QOSISVALIDATOR_H
 #define QOSISVALIDATOR_H
 
-#include <QtXmlPatterns/QXmlSchemaValidator>
-#include <QtCore/QXmlStreamReader>
-#include <QtCore/QXmlStreamWriter>
-
-#include "qosis.h"
+#include "qosisglobals.h"
 #include "qosiscommons.h"
 #include "qosisreader.h"
 
-using namespace QOSIS;
-
 namespace QOSIS {
+
+class QOsisReader;
 
 /*!
  * \brief The QOsisValidator class handles validating the xml for OSIS 2.1 format.
@@ -23,7 +19,6 @@ namespace QOSIS {
  *
  *
  */
-
 class QOsisValidator : public QOsisCommons {
 public:
     explicit QOsisValidator();

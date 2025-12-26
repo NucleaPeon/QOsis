@@ -7,8 +7,6 @@
 
 #include "qosiscommons.h"
 
-using namespace QOSIS;
-
 namespace QOSIS {
 
 class QOsisWriter : public QOsisCommons {

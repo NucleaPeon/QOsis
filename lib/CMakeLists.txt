@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(qosis
-        VERSION 0.0.1.0
+        VERSION 0.0.1.1
         LANGUAGES C CXX
         DESCRIPTION "OSIS (Open Scriptural Information Standard™) Library"
 )
@@ -31,19 +31,22 @@ list(APPEND QOSIS_HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisimporter.h
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisexporter.h
     ${CMAKE_CURRENT_LIST_DIR}/src/qosiscommons.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosismeta.h
     ${CMAKE_CURRENT_LIST_DIR}/src/qosis_global.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosisglobals.h
     ${CMAKE_CURRENT_LIST_DIR}/src/version.h
 )
 
 
 list(APPEND QOSIS_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/src/qosis.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosiscommons.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisreader.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosiswriter.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisvalidator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisimporter.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisexporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/qosiscommons.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosismeta.cpp
 )
 
 add_library(${PROJECT_NAME}

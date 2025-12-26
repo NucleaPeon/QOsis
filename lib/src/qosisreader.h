@@ -8,9 +8,15 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QFile>
 
+#include "qosis.h"
 #include "qosiscommons.h"
 
+using namespace QOSIS;
+using namespace QOSIS::Globals;
+
 namespace QOSIS {
+
+class QOsisCommons;
 
 class QOsisReader : public QOsisCommons {
 public:
@@ -21,6 +27,7 @@ public:
     QByteArray read();
 
 private:
+    const QString schema = "";
 };
 
 }
