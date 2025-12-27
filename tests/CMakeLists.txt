@@ -34,6 +34,7 @@ list(APPEND TEST_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_writer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_meta.cpp
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_json.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/singletonbook.cpp
 )
 
 list(APPEND TEST_HEADERS
@@ -44,6 +45,7 @@ list(APPEND TEST_HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_writer.h
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_meta.h
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_json.h
+    ${CMAKE_CURRENT_LIST_DIR}/singletonbook.h
 )
 
 list(APPEND TEST_OTHER

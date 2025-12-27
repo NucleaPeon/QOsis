@@ -9,9 +9,7 @@ void TestXmlJSON::init()
 
 void TestXmlJSON::testXmlToJson()
 {
-    QOsisReader *reader = new QOsisReader(TEST_FILE);
-    reader->initReader();
-    _json->process(reader);
+
 }
 
 

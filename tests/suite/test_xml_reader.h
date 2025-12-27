@@ -7,6 +7,7 @@
 #include <QtTest/QTest>
 
 #include <qosis.h>
+#include "../singletonbook.h"
 
 
 using namespace QOSIS;
@@ -25,7 +26,6 @@ private slots:
 
 private:
     QOsis *meta;
-    const QString TEST_FILE = "://kjv.xml";
 };
 
 

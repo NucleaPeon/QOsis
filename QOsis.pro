@@ -47,6 +47,8 @@ OTHER_FILES = gui/src/main.cpp\
         cli/version.h.in\
         tests/CMakeLists.txt\
         tests/test_runner.cpp\
+        tests/singletonbook.cpp\
+        tests/singletonbook.h\
         tests/suite/test_xml_reader.cpp\
         tests/suite/test_xml_reader.h\
         tests/suite/test_xml_writer.cpp\

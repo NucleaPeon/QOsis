@@ -10,6 +10,8 @@
 #include "suite/test_xml_exporter.h"
 #include "suite/test_xml_json.h"
 
+#include "singletonbook.h"
+
 //#include "qosis.h"
 
 int main(int argc, char *argv[])
@@ -19,26 +21,31 @@ int main(int argc, char *argv[])
     Q_UNUSED(argv)
     int result = 0;
 
-//    TestXmlMeta *metaTests = new TestXmlMeta();
-//    result = QTest::qExec(metaTests);
+    const QString TEST_FILE = "://kjv.xml";
 
-//    TestXmlValidator *validateTests = new TestXmlValidator();
-//    result = QTest::qExec(validateTests);
+    BibleSingleton* bible = BibleSingleton::getInstance();
+    bible->initOsis(TEST_FILE);
+
+    TestXmlMeta *metaTests = new TestXmlMeta();
+    result = QTest::qExec(metaTests);
+
+    TestXmlValidator *validateTests = new TestXmlValidator();
+    result = QTest::qExec(validateTests);
 
     TestXmlReader *readerTests = new TestXmlReader();
     result = QTest::qExec(readerTests);
 
-//    TestXmlWriter *writerTests = new TestXmlWriter();
-//    result = QTest::qExec(writerTests);
+    TestXmlWriter *writerTests = new TestXmlWriter();
+    result = QTest::qExec(writerTests);
 
-//    TestXmlImporter *importTests = new TestXmlImporter();
-//    result = QTest::qExec(importTests);
+    TestXmlImporter *importTests = new TestXmlImporter();
+    result = QTest::qExec(importTests);
 
-//    TestXmlExporter *exportTests = new TestXmlExporter();
-//    result = QTest::qExec(exportTests);
+    TestXmlExporter *exportTests = new TestXmlExporter();
+    result = QTest::qExec(exportTests);
 
-//    TestXmlJSON *jsonTests = new TestXmlJSON();
-//    result = QTest::qExec(jsonTests);
+    TestXmlJSON *jsonTests = new TestXmlJSON();
+    result = QTest::qExec(jsonTests);
 
     return result;
 }
