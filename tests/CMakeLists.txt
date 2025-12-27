@@ -25,6 +25,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+message(STATUS "Debugging flag enabled: ${QT_DEBUG}")
+
 
 list(APPEND TEST_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_validator.cpp

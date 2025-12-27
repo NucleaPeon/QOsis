@@ -13,3 +13,4 @@ CMakeCache.txt
 *.dylib
 *.in
 */build/*
+build/*

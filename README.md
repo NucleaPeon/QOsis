@@ -56,6 +56,29 @@ Additional Notes:
 * ``BUILD_`` declaratives will be appended to a list of projects to be built.
     Can be specified multiple times, not sure why you'd want to.
 
+How to Use
+==========
+
+```
+#include <qosis.h>
+
+...
+
+void Class::Test()
+{
+
+    QOsisReader* reader = new QOsisReader("/path/to/file.xml");
+    OsisStructure* osis = reader->getOsisData();
+    QList<OsisVerse*> verses = osis.find("Gen", 1, 1, 10)
+    foreach(OsisVerse* verse, verses) {
+        const QString v = verse->verse();
+        // Do stuff with it
+    }
+}
+
+```
+
+
 Testing
 =======
 

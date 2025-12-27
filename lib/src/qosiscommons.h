@@ -11,6 +11,10 @@
 
 #include "qosisglobals.h"
 
+#ifdef QT_DEBUG
+#include <QtCore/QDebug>
+#endif
+
 namespace QOSIS {
 
 class QOsisCommons {
@@ -51,6 +55,11 @@ public:
 
     int characterCount();
 
+#ifdef QT_DEBUG
+    const friend QDebug operator<<(QDebug dbg,  OsisVerse &verse);
+#endif
+
+
 private:
     QString _verse;
     int _versenum;
@@ -71,6 +80,11 @@ public:
     int verseCount();
     QList<int> verses();
 
+#ifdef QT_DEBUG
+    const friend QDebug operator<<(QDebug dbg,  OsisChapter &chapter);
+#endif
+
+
 private:
     QMap<int, OsisVerse*> _data;
     int _chapter;
@@ -90,6 +104,9 @@ public:
     QList<int> chapters();
 
     int chapterCount();
+#ifdef QT_DEBUG
+    const friend QDebug operator<<(QDebug dbg,  OsisBook &book);
+#endif
 
 private:
     QString _name;
@@ -120,6 +137,12 @@ public:
     int bookCount();
     int chapterCount();
     int verseCount();
+    bool isEmpty();
+
+    QList<OsisVerse*> find(const QString book, const int chapter, const int verse, int additional = 0);
+#ifdef QT_DEBUG
+    const friend QDebug operator<<(QDebug dbg,  OsisStructure &structure);
+#endif
 
 private:
     /*!

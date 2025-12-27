@@ -1,5 +1,4 @@
 #include "qosiscommons.h"
-#include <QtCore/QDebug>
 
 using namespace QOSIS;
 
@@ -177,6 +176,61 @@ int OsisStructure::verseCount()
     }
     return c;
 }
+
+bool OsisStructure::isEmpty()
+{
+    return this->_data.isEmpty();
+}
+
+QList<OsisVerse *> OsisStructure::find(const QString book, const int chapter, const int verse, int additional)
+{
+    QList<OsisVerse*> verses;
+    if(additional < 0)
+        additional = 0;
+    OsisBook* osisbook = this->book(book);
+    OsisChapter* osischap = osisbook->chapter(chapter);
+    for(int i = verse; i <= additional; ++i) {
+        verses.append(osischap->verse(i));
+    }
+
+    return verses;
+}
+
+#ifdef QT_DEBUG
+const QDebug operator<<(QDebug dbg,  OsisVerse &verse)
+{
+    QString name = QString("Verse %1 (%2)").arg(QString(verse.verseNum())).arg(verse.verse());
+    return dbg.nospace() << name;
+}
+
+const QDebug operator<<(QDebug dbg,  OsisChapter &chapter)
+{
+    QString name = QString("%1 (%2 verses)").arg(QString(chapter.chapter()), chapter.verseCount());
+    return dbg.nospace() << name;
+}
+
+const QDebug operator<<(QDebug dbg,  OsisBook &book)
+{
+    QString name = QString("%1 (%2 chapters)").arg(book.name(), book.chapterCount());
+    return dbg.nospace() << name;
+}
+
+const QDebug operator<<(QDebug dbg,  OsisStructure &structure)
+{
+    QString name = QString("%1 (%2) %3").arg(structure.title()).arg(structure.lang());
+    if (structure.isEmpty())
+        name.arg("(empty)");
+    else {
+        int books = structure.bookCount();
+        int chapters = structure.chapterCount();
+        int verses = structure.verseCount();
+        QString data = QString("%1 books, %2 chapters, %3 verses").arg(books).arg(chapters).arg(verses);
+        name.arg(data);
+    }
+    return dbg.nospace() << name;
+}
+
+#endif
 
 
 OsisVerse::OsisVerse()

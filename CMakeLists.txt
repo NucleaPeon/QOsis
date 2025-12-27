@@ -7,12 +7,12 @@ if (APPLE)
 endif()
 
 project(QOsis
-        VERSION 0.0.0.1
+        VERSION 0.0.1.0
         LANGUAGES C CXX
         DESCRIPTION "OSIS (Open Scriptural Information Standard™) Parsing Library and Utilities"
 )
 
-add_compile_options(-DQT_DEBUG=ON)
+add_compile_options(-DQT_DEBUG=YES)
 
 include(GNUInstallDirs)  # REQUIRED TO INSTALL PKGCONFIG TO PROPER DIR!
 include(CTest)
@@ -22,6 +22,7 @@ set(BUILD_GUI OFF CACHE BOOL "Build OSIS GUI component")
 set(ONLY_LIBRARY OFF CACHE BOOL "Build only the OSIS library component")
 set(ONLY_CLI OFF CACHE BOOL "Build only the OSIS CLI component")
 set(ONLY_GUI OFF CACHE BOOL "Build only the OSIS GUI component")
+#set(QT_DEBUG OFF CACHE BOOL "Enable debugging components")
 
 
 if(BUILD_LIBRARY)
@@ -50,10 +51,6 @@ endif()
 if(ONLY_LIBRARY)
     set(QOSIS_BUILDS lib;)
 endif()
-
-
-
-
 
 ### DEPENDENCIES ###
 

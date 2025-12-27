@@ -79,6 +79,7 @@ set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
 set(SYSCONFIG_INSTALL_DIR ${CMAKE_INSTALL_SYSCONFDIR}/${PROJECT_NAME}
     CACHE PATH "Location of configuration files" )
 
+message(STATUS "${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake")
 configure_package_config_file(${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake.in
   ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake
   INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
@@ -88,8 +89,7 @@ write_basic_package_version_file(
   VERSION ${VERSION}
   COMPATIBILITY SameMajorVersion )
 #configure_file(${CMAKE_CURRENT_LIST_DIR}/qosis.pc.in ${CMAKE_CURRENT_LIST_DIR}/qosis.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
+install(FILES ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME} )
 install(FILES ${CMAKE_CURRENT_LIST_DIR}/src/qosis.pc DESTINATION
         ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)

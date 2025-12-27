@@ -26,6 +26,19 @@ void TestXmlReader::testReadingFile()
     QVERIFY(data->bookCount() == 66); // KJV 66 books in the bible
 }
 
+void TestXmlReader::testDebug()
+{
+    // Not working as expected, still giving pointer addresses.
+#ifdef QT_DEBUG
+    OsisStructure* structure = BibleSingleton::getInstance()->osis();
+    qDebug() << structure;
+    qDebug() << structure->book("Gen");
+    qDebug() << structure->book("Gen")->chapter(1);
+    qDebug() << structure->book("Gen")->chapter(1)->verse(1);
+#endif
+
+}
+
 void TestXmlReader::cleanupTestCase()
 {
 }
