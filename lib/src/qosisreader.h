@@ -6,6 +6,8 @@
 #include <QtCore/QXmlStreamWriter>
 #include <QtCore/QByteArray>
 #include <QtCore/QFile>
+#include <QtCore/QString>
+#include <QtCore/QStringRef>
 
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
@@ -25,6 +27,12 @@ namespace QOSIS {
 
 class QOsisCommons;
 
+const QString HEADER = QString("header");
+const QStringRef HEADER_REF = QStringRef(&HEADER);
+
+const QString OSISID = QString("osisID");
+const QStringRef OSISID_REF = QStringRef(&OSISID);
+
 /*!
  * \brief The QOsisReader class takes a path and reads contents
  */
@@ -33,10 +41,6 @@ public:
     explicit QOsisReader();
     QOsisReader(const QString path);
     ~QOsisReader();
-
-    // Methods to get content from xml file, commonly used:
-
-    // END
 
     /*!
      * \brief initReader Call this when class is set up correctly
@@ -48,9 +52,11 @@ public:
 
 private:
     void parseXml();
-    QJsonObject handleXml(QJsonObject o, const QString name);
+    void processXml(QStringRef tagname);
     const QString _schema = QOSIS::Globals::XML_NAMESPACE;
     QXmlStreamReader* _reader = NULL;
+    QList<QStringRef> _tags;
+    OsisStructure* _data;
 };
 
 }

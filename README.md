@@ -67,6 +67,8 @@ said xml files, we'll have to modify them (automatically?) to use local xsd.
 LEFT OFF NOTES
 ==============
 
+[ ] Finish up xml to structure conversion.
+
 [ ] Projects that depend on the library should attempt to import and if they fail, attempt to include relative
     paths to get access to the code we need.
 [ ] When handling <work> tags, ref doc pdf chapter 7 goes over what is valid in each
