@@ -1,5 +1,4 @@
 #include "qosiscommons.h"
-#include <QtCore/QDebug>
 
 using namespace QOSIS;
 
@@ -32,7 +31,6 @@ QFile *QOsisCommons::file()
 void QOsisCommons::processPath()
 {
     if (isValidPath()) {
-        qDebug() << Q_FUNC_INFO << this->path();
         _file = new QFile(this->_path);
     }
 

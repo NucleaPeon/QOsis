@@ -8,9 +8,9 @@
 
 #include <qosis.h>
 
+
 using namespace QOSIS;
 
-static const QString TEST_FILE = "://kjv.xml";
 
 class TestXmlReader : public QObject {
 
@@ -25,6 +25,7 @@ private slots:
 
 private:
     QOsis *meta;
+    const QString TEST_FILE = "://kjv.xml";
 };
 
 

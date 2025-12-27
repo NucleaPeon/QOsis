@@ -25,6 +25,7 @@ set(PACKAGE_HEADERS
 
 list(APPEND QOSIS_HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/src/qosis.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosisjson.h
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisreader.h
     ${CMAKE_CURRENT_LIST_DIR}/src/qosiswriter.h
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisvalidator.h
@@ -40,6 +41,7 @@ list(APPEND QOSIS_HEADERS
 
 list(APPEND QOSIS_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/src/qosis.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/qosisjson.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosiscommons.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosisreader.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/qosiswriter.cpp

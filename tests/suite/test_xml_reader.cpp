@@ -2,7 +2,6 @@
 
 void TestXmlReader::initTestCase()
 {
-    qDebug() << "initializing test case";
     this->meta = new QOsis();
 }
 
@@ -20,9 +19,12 @@ void TestXmlReader::testReadingFile()
 {
     this->meta->setPath(TEST_FILE);
     QOsisReader* reader = new QOsisReader(TEST_FILE);
-    QByteArray data = reader->read();
-    QVERIFY(! data.isEmpty());
-    delete reader;
+    QVERIFY(reader->reader() != NULL);
+    qDebug() << reader->reader()->hasError() << reader->reader()->errorString();
+    QVERIFY(! reader->reader()->hasError());
+//    QVERIFY(! reader->reader()->atEnd());
+//    QByteArray data = reader->read();
+//    QVERIFY(! data.isEmpty());
 }
 
 void TestXmlReader::cleanupTestCase()

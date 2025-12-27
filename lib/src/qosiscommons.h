@@ -5,6 +5,10 @@
 #include <QtCore/QDir>
 #include <QtCore/QString>
 
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
+
 #include "qosisglobals.h"
 
 namespace QOSIS {

@@ -35,6 +35,8 @@ OTHER_FILES = gui/src/main.cpp\
         lib/src/qosisimporter.cpp\
         lib/src/qosisvalidator.h\
         lib/src/qosisvalidator.cpp\
+        lib/src/qosisjson.h\
+        lib/src/qosisjson.cpp\
         lib/src/qosiscommons.h\
         lib/src/qosiscommons.cpp\
         lib/src/qosis_global.h\
@@ -57,6 +59,8 @@ OTHER_FILES = gui/src/main.cpp\
         tests/suite/test_xml_exporter.h\
         tests/suite/test_xml_validator.cpp\
         tests/suite/test_xml_validator.h\
+        tests/suite/test_xml_json.cpp\
+        tests/suite/test_xml_json.h\
         tests/qosis-testfile.xml\
         tests/qosis-files.qrc\
         tests/kjv.xml\

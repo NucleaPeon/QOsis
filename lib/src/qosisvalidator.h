@@ -3,7 +3,10 @@
 
 #include "qosisglobals.h"
 #include "qosiscommons.h"
-#include "qosisreader.h"
+
+#include <QtXmlPatterns/QXmlSchema>
+#include <QtXmlPatterns/QXmlSchemaValidator>
+
 
 namespace QOSIS {
 
@@ -28,7 +31,8 @@ public:
     int validateXml();
 
 private:
-    QOsisReader *reader;
+    void setupSchema(const QString schema = QOSIS::Globals::XML_NAMESPACE);
+    QXmlSchema* _schema;
 };
 
 }

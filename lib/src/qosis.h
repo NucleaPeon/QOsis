@@ -4,6 +4,7 @@
 #include "qosisglobals.h"
 #include "qosiscommons.h"
 #include "qosismeta.h"
+#include "qosisjson.h"
 #include "qosisreader.h"
 #include "qosiswriter.h"
 #include "qosisimporter.h"
@@ -15,6 +16,7 @@ using namespace QOSIS;
 namespace QOSIS {
 
 class QOsis;
+class QOsisJson;
 class QOsisValidator;
 class QOsisReader;
 class QOsisWriter;
