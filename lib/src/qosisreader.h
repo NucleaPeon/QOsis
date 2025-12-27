@@ -48,7 +48,7 @@ public:
     void initReader();
     QXmlStreamReader* reader();
     bool validate(); // Creates a QOsisValidator, validates against schema and returns bool.
-
+    OsisStructure* getOsisData();
 
 private:
     void parseXml();

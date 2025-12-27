@@ -48,6 +48,11 @@ bool QOsisReader::validate()
     return v.validateXml() == QOSIS::ENUMS::Validation::OK;
 }
 
+OsisStructure *QOsisReader::getOsisData()
+{
+    return this->_data;
+}
+
 void QOsisReader::parseXml()
 {
     _data = new OsisStructure();
@@ -73,7 +78,9 @@ void QOsisReader::processXml(QStringRef tagname)
         } else if (tagname == "div" && _reader->attributes().contains(QXmlStreamAttribute("type", "book"))) {
             foreach(QXmlStreamAttribute attr, _reader->attributes()) {
                 if (attr.name() == "osisID") {
-                    _data->addBook(attr.value().toString());
+                    const QString bookname = attr.value().toString();
+                    _data->addBook(bookname);
+                    _data->book(bookname)->setName(bookname);
                 }
             }
         } else if (tagname == "chapter" || (tagname == "div" && _reader->attributes().contains(QXmlStreamAttribute("type", "chapter")))) {
@@ -81,50 +88,24 @@ void QOsisReader::processXml(QStringRef tagname)
                 if (attr.name() == "osisID") {
                     QString val = attr.value().toString();
                     QStringList parts = val.split(".");
-                    _data->book(parts.at(0)).addChapter(parts.at(1).toInt());
+                    int chapter = parts.at(1).toInt();
+                    OsisBook* book = _data->book(parts.at(0));
+                    book->addChapter(chapter);
+                }
+            }
+        } else if (tagname == "verse") {
+            foreach(QXmlStreamAttribute attr, _reader->attributes()) {
+                if (attr.name() == "osisID") {
+                    QString val = attr.value().toString();
+                    QStringList parts = val.split(".");
+                    int chapter = parts.at(1).toInt();
+                    int verse = parts.at(2).toInt();
+                    OsisBook* book = _data->book(parts.at(0));
+                    OsisChapter* chap = book->chapter(chapter);
+                    chap->addVerse(verse, _reader->readElementText());
                 }
             }
         }
-
-
-//        _tags.append(tagname);
-//        QJsonObject data = _root;
-//        if (! data.contains(tagname.toString())) {
-//            data[tagname.toString()] = QJsonObject();
-//            data = data.value(tagname.toString()).toObject();
-//        }
-//        qDebug() << data;
-//        foreach(QStringRef tag, _tags) {
-//            if (data.contains(tag.toString())) {
-//                QJsonObject o = data.value(tag.toString()).toObject();
-//                data = o;
-//            } else {
-//                QJsonObject o = QJsonObject();
-//                data.insert(tag.toString(), o);
-//                data = o;
-//            }
-//        }
-
-
-
-//        if (_tags.count() == 1) {
-//            // First level tags go into the root node.
-//            rootdata.insert(_tags.at(0).toString(), data);
-//            qDebug() << "Inserting " << data << "to root data" << rootdata;
-//        } else {
-//            // Later than first level, go to next to last level and insert last level object there
-//            QJsonObject obj = rootdata;
-//            for (int i=_tags.count()-1; i >= 1; --i) {
-//                QStringRef ref = _tags.at(i);
-//                if (! data.contains(ref.toString())) {
-//                    obj.insert(ref.toString(), QJsonObject());
-//                    obj = data.value(ref.toString()).toObject();
-//                }
-//                if (i == 1) {
-//                    obj.insert(_tags.at(0).toString(), data);
-//                }
-//            }
-//        }
     } else if (_reader->isEndElement()) {
         _tags.pop_back();
     }

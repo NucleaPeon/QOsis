@@ -22,6 +22,10 @@ void TestXmlReader::testReadingFile()
     QVERIFY(reader->reader() != NULL);
     qDebug() << reader->reader()->hasError() << reader->reader()->errorString();
     QVERIFY(! reader->reader()->hasError());
+    OsisStructure* data = reader->getOsisData();
+    qDebug() << data->bookCount() << "Books";
+    qDebug() << data->chapterCount() << "Chapters";
+    qDebug() << data->verseCount() << "Verses";
 //    QVERIFY(! reader->reader()->atEnd());
 //    QByteArray data = reader->read();
 //    QVERIFY(! data.isEmpty());
