@@ -48,6 +48,7 @@ list(APPEND TEST_HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_meta.h
     ${CMAKE_CURRENT_LIST_DIR}/suite/test_xml_json.h
     ${CMAKE_CURRENT_LIST_DIR}/singletonbook.h
+    ${CMAKE_CURRENT_LIST_DIR}/variables.h
 )
 
 list(APPEND TEST_OTHER

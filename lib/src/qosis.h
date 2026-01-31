@@ -1,7 +1,10 @@
 #ifndef QOSIS_H
 #define QOSIS_H
 
+#include "qosis_global.h"
+
 #include "qosisglobals.h"
+
 #include "qosiscommons.h"
 #include "qosismeta.h"
 #include "qosisjson.h"

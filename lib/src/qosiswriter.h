@@ -16,7 +16,7 @@ public:
     ~QOsisWriter();
 
 private:
-    QString _path = NULL;
+    QString _path;
 };
 
 }

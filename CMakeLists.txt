@@ -62,6 +62,8 @@ find_package(Qt5 REQUIRED
     Test
 )
 
+
+
 # If no declaratives are set, we build everything. Determine if something is set
 
 set(QOSIS_BUILD_LEN 0)

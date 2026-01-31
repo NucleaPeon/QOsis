@@ -27,7 +27,7 @@ public:
 
 private:
     void processPath();
-    QString _path = NULL;
+    QString _path;
     QFile* _file;
 };
 

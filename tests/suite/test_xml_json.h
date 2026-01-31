@@ -7,6 +7,9 @@
 #include <QtTest/QTest>
 
 #include <qosis.h>
+#include "../variables.h"
+
+
 
 using namespace QOSIS;
 
@@ -22,7 +25,7 @@ private slots:
 
 private:
     QOsisJson* _json;
-    const QString TEST_FILE = "://kjv.xml";
+
 };
 
 

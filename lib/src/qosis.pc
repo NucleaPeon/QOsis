@@ -1,11 +1,11 @@
 prefix=/usr/local
 exec_prefix=/usr/local
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
+libdir=${exec_prefix}/
+includedir=${prefix}/
 
 Name: qosis
 Description: OSIS (Open Scriptural Information Standard™) Library
-Version: 0.1.0.0
+Version: 1.0.0.0
 
 Requires:
 Libs: -L${libdir} -lqosis

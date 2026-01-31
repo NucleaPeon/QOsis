@@ -18,7 +18,6 @@ OTHER_FILES = gui/src/main.cpp\
         gui/src/preferences.ui\
         CMakeLists.txt\
         lib/CMakeLists.txt\
-        lib/version.h.in\
         lib/qosis.pc.in\
         lib/src/qosis.h\
         lib/src/qosis.cpp\
@@ -41,6 +40,7 @@ OTHER_FILES = gui/src/main.cpp\
         lib/src/qosiscommons.cpp\
         lib/src/qosis_global.h\
         lib/src/version.h\
+        lib/src/qosis.pc.in\
         gui/CMakeLists.txt\
         gui/version.h.in\
         cli/CMakeLists.txt\
@@ -65,6 +65,7 @@ OTHER_FILES = gui/src/main.cpp\
         tests/suite/test_xml_json.h\
         tests/qosis-testfile.xml\
         tests/qosis-files.qrc\
+        tests/variables.h\
         tests/kjv.xml\
         tests/osisCore.2.1.1.xsd\
         README.md

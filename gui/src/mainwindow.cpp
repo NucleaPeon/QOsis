@@ -101,8 +101,8 @@ void MainWindow::loadFile(const QString path)
         return;
     }
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QOsisReader* reader = new QOsisReader(path);
-        _osis_hash.insert(path, reader);
+        QOsisReader* reader = new QOsisReader();
+//        _osis_hash.insert(path, reader);
         file.close();
     }
 }

@@ -2,6 +2,7 @@
 #define QOSIS_GLOBAL_H
 
 #include <QtCore/qglobal.h>
+#include "qosis.h"
 
 #if defined(QOSIS_LIBRARY)
 # define QOSISSHARED_EXPORT Q_DECL_EXPORT

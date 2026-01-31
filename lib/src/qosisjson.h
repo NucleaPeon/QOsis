@@ -30,7 +30,7 @@ public:
 
 private:
     QJsonObject store(QXmlStreamReader *reader, QList<QStringRef> tags);
-    QString _path = "";
+    QString _path;
     QJsonObject _root;
 };
 

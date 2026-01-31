@@ -23,6 +23,8 @@ find_package(Qt5 REQUIRED
     Test
 )
 
+add_compile_options(-v)
+
 # Immediately set the version.h header
 configure_file(${CMAKE_CURRENT_LIST_DIR}/src/version.h.in
     ${CMAKE_CURRENT_LIST_DIR}/src/version.h @ONLY)
@@ -48,8 +50,8 @@ list(APPEND APP_RES)
 
 list(APPEND APP_OTHER)
 
-#find_package(qosis CONFIG REQUIRED 0.0.0.1)
-#target_link_libraries(${PROJECT_NAME} qosis)
+find_package(qosis CONFIG REQUIRED 1.0.0.0)
+target_link_libraries(${PROJECT_NAME} qosis)
 
 if (APPLE)
     set(APP_ICON "${MACOSX_BUNDLE_ICON_FILE}")
