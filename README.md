@@ -138,7 +138,10 @@ XML Format key points:
 
 
 
+License
+=======
 
+This project and library are licensed under the GPL 3.0 license.
 
 
 
