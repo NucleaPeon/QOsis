@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QtCore/QDebug>
 
+using namespace QOSIS;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,6 +21,37 @@ MainWindow::~MainWindow()
     delete this->mainMenuBar;
     delete this->statusBar;
     delete ui;
+}
+
+void MainWindow::setup()
+{
+    this->aboutAction = new QAction(0);
+    this->aboutAction->setMenuRole(QAction::AboutRole);
+    this->aboutWindow = new About();
+    this->preferencesAction = new QAction(0);
+    this->preferencesAction->setMenuRole(QAction::PreferencesRole);
+    this->preferencesWindow = new Preferences();
+    ui->setupUi(this);
+    this->mainMenuBar = new QMenuBar(0);
+    this->mainMenu = new QMenu(0);
+    this->mainMenuBar->addMenu(this->mainMenu);
+    this->mainMenu->addAction(this->aboutAction);
+    this->mainMenu->addAction(this->preferencesAction);
+
+    connect(this->aboutAction, SIGNAL(triggered()), this->aboutWindow, SLOT(show()));
+    connect(this->preferencesAction, SIGNAL(triggered()), this->preferencesWindow, SLOT(show()));
+
+    this->statusBar = new QStatusBar();
+    this->setStatusBar(this->statusBar);
+
+    this->statusBar->showMessage("Ready.");
+    this->setWindowTitle(tr("QOsis Text Application"));
+
+    // CONNECTIONS
+    connect(this->ui->btnQuit, SIGNAL(clicked()), this, SLOT(aboutToClose()));
+    connect(this->ui->btnOpen, SIGNAL(clicked()), this, SLOT(openText()));
+
+    _osis_hash = QHash<QString, QOsisReader*>();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -53,38 +86,14 @@ void MainWindow::openText()
         loadFile(path);
 }
 
-void MainWindow::setup()
-{
-    this->aboutAction = new QAction(0);
-    this->aboutAction->setMenuRole(QAction::AboutRole);
-    this->aboutWindow = new About();
-    this->preferencesAction = new QAction(0);
-    this->preferencesAction->setMenuRole(QAction::PreferencesRole);
-    this->preferencesWindow = new Preferences();
-    ui->setupUi(this);
-    this->mainMenuBar = new QMenuBar(0);
-    this->mainMenu = new QMenu(0);
-    this->mainMenuBar->addMenu(this->mainMenu);
-    this->mainMenu->addAction(this->aboutAction);
-    this->mainMenu->addAction(this->preferencesAction);
-
-    connect(this->aboutAction, SIGNAL(triggered()), this->aboutWindow, SLOT(show()));
-    connect(this->preferencesAction, SIGNAL(triggered()), this->preferencesWindow, SLOT(show()));
-
-    this->statusBar = new QStatusBar();
-    this->setStatusBar(this->statusBar);
-
-    this->statusBar->showMessage("Ready.");
-    this->setWindowTitle(tr("QOsis Text Application"));
-
-    // CONNECTIONS
-    connect(this->ui->btnQuit, SIGNAL(clicked()), this, SLOT(aboutToClose()));
-    connect(this->ui->btnOpen, SIGNAL(clicked()), this, SLOT(openText()));
-}
 
 void MainWindow::loadFile(const QString path)
 {
     qDebug() << Q_FUNC_INFO << path;
+    if (_osis_hash.contains(path)) {
+        qDebug("File path already has been loaded");
+        return; // TODO: Maybe show the loaded file in the ui (focus/view)
+    }
     QFile file(path);
     if (! file.exists()) {
         QString warning = QString("File does not exist: %1").arg(path);
@@ -92,7 +101,8 @@ void MainWindow::loadFile(const QString path)
         return;
     }
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << file.readAll();
+        QOsisReader* reader = new QOsisReader(path);
+        _osis_hash.insert(path, reader);
         file.close();
     }
 }

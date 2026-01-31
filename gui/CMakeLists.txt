@@ -15,6 +15,14 @@ set(CMAKE_AUTORCC ON)
 
 message(STATUS "Building OSIS GUI in ${CMAKE_CURRENT_LIST_DIR}...")
 
+
+find_package(Qt5 REQUIRED
+    Core
+    Gui
+    Widgets
+    Test
+)
+
 # Immediately set the version.h header
 configure_file(${CMAKE_CURRENT_LIST_DIR}/src/version.h.in
     ${CMAKE_CURRENT_LIST_DIR}/src/version.h @ONLY)

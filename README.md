@@ -54,7 +54,7 @@ Additional Notes:
 * ``ONLY_`` declaratives will be prioritized. If specifying multiple ``-DONLY_`` commands,
     the last one will be the one that is recognized.
 * ``BUILD_`` declaratives will be appended to a list of projects to be built.
-    Can be specified multiple times, not sure why you'd want to.
+    Can be specified multiple times, but won't have any additional effect.
 
 How to Use
 ==========

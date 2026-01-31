@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QtCore/QHash>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QMenu>
@@ -11,6 +12,8 @@
 
 #include "about.h"
 #include "preferences.h"
+
+#include <qosis.h>
 
 namespace Ui {
 class MainWindow;
@@ -49,6 +52,8 @@ private:
     About *aboutWindow;
     Preferences *preferencesWindow;
     QStatusBar *statusBar;
+
+    QHash<QString, QOsisReader*> _osis_hash;
 };
 
 #endif // MAINWINDOW_H
