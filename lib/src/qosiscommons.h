@@ -135,6 +135,7 @@ public:
     QOsisBook *book(QString name);
 
     int bookCount();
+    QList<QString> books() const;
 
     int chapterCount();
 
@@ -154,6 +155,10 @@ private:
      *
      */
     QHash<QString, QOsisBook*> _data;
+    /*!
+     * \brief _order a list of strings in order of addition to record linearity
+     */
+    QList<QString> _order;
 
     QString _osisIDWork;
     QString _lang;

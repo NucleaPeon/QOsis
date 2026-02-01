@@ -93,6 +93,8 @@ LEFT OFF NOTES
 
 [ ] Finish up xml to structure conversion.
 
+[ ] Put loading of file into its own Thread so it doesn't spin out.
+
 [ ] Projects that depend on the library should attempt to import and if they fail, attempt to include relative
     paths to get access to the code we need.
 [ ] When handling <work> tags, ref doc pdf chapter 7 goes over what is valid in each
@@ -102,7 +104,7 @@ LEFT OFF NOTES
     without having to re-read it and waste memory.
 [ ] Download a full bible osis format file and validate/parse it using tests and
     ensure rules are followed.
-[ ] Download the xml spec so it can be loaded in. Looks like Qt5 expects a QApplication
+[?] Download the xml spec so it can be loaded in. Looks like Qt5 expects a QApplication
     when loading from the network.
 
 

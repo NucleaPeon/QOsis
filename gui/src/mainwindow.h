@@ -8,6 +8,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QFileDialog>
+#include <QtGui/QStandardItemModel>
 #include <QtGui/QCloseEvent>
 
 #include "about.h"
@@ -65,6 +66,7 @@ private:
     About *aboutWindow;
     Preferences *preferencesWindow;
     QStatusBar *statusBar;
+    QStandardItemModel* _osis_view_model;
 
     QHash<QString, QOsis*> _osis_hash;
 };

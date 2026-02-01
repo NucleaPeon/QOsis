@@ -51,6 +51,8 @@ void MainWindow::setup()
     connect(this->ui->btnQuit, SIGNAL(clicked()), this, SLOT(aboutToClose()));
     connect(this->ui->btnOpen, SIGNAL(clicked()), this, SLOT(openText()));
 
+    _osis_view_model = new QStandardItemModel();
+    this->ui->osisTreeView->setModel(_osis_view_model);
     _osis_hash = QHash<QString, QOsis*>();
 }
 
@@ -107,9 +109,9 @@ void MainWindow::loadFile(const QString path)
 
 void MainWindow::setupOsisFile(const QString path, bool fully_render)
 {
-    qDebug() << Q_FUNC_INFO << path << fully_render;
     QOsisReader* reader = _osis_hash.value(path)->reader();
-    qDebug() << reader->isValidPath() << "is a valid path";
     QOsisStructure* structure = reader->getOsisData();
-    qDebug() << structure->title();
+    foreach(const QString str, structure->books())
+        qDebug() << str;
+    qDebug() << "Done.";
 }

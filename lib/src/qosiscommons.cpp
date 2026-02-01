@@ -78,7 +78,7 @@ int QOsisBook::chapterCount()
 QOsisStructure::QOsisStructure() :
     OsisCommon()
 {
-
+    _order = QList<QString>();
 }
 
 QString QOsisStructure::osisIDWork() const
@@ -134,6 +134,7 @@ void QOsisStructure::addBook(const QString name)
 {
     QOsisBook* book = new QOsisBook();
     book->setName(name);
+    _order.append(name);
     this->_data.insert(name, book);
 }
 
@@ -145,6 +146,11 @@ QOsisBook* QOsisStructure::book(QString name)
 int QOsisStructure::bookCount()
 {
     return this->_data.keys().count();
+}
+
+QList<QString> QOsisStructure::books() const
+{
+    return this->_order;
 }
 
 int QOsisStructure::chapterCount()
