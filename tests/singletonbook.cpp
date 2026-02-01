@@ -18,12 +18,12 @@ BibleSingleton::~BibleSingleton()
 
 }
 
-void BibleSingleton::setOsisStructure(OsisStructure *osis)
+void BibleSingleton::setOsisStructure(QOsisStructure *osis)
 {
     this->_ostruct = osis;
 }
 
-OsisStructure *BibleSingleton::osis()
+QOsisStructure *BibleSingleton::osis()
 {
     if (this->_meta == NULL || this->_ostruct == NULL) { return NULL; }
     return this->_ostruct;

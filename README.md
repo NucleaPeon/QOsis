@@ -67,7 +67,8 @@ How to Use
 void Class::Test()
 {
 
-    QOsisReader* reader = new QOsisReader("/path/to/file.xml");
+    QOsis* osis = new QOsis("/path/to/file.xml");
+    QOsisReader* reader = osis->reader();
     OsisStructure* osis = reader->getOsisData();
     QList<OsisVerse*> verses = osis.find("Gen", 1, 1, 10)
     foreach(OsisVerse* verse, verses) {

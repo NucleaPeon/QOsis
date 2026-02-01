@@ -17,14 +17,14 @@ public:
     static BibleSingleton* getInstance();
     ~BibleSingleton();
 
-    void setOsisStructure(OsisStructure* osis);
-    OsisStructure* osis();
+    void setOsisStructure(QOsisStructure* osis);
+    QOsisStructure* osis();
     void initOsis(QString path);
     QOsis* meta();
 
 private:
     explicit BibleSingleton(QObject *parent = 0);
-    OsisStructure* _ostruct = NULL;
+    QOsisStructure* _ostruct = NULL;
     QOsis *_meta = NULL;
 
 };

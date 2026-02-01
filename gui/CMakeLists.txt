@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(qosis-gui
-        VERSION 0.0.0.1
+        VERSION 0.0.0.2
         LANGUAGES C CXX
         DESCRIPTION "OSIS (Open Scriptural Information Standard™) Graphical User Interface"
 )
@@ -23,7 +23,7 @@ find_package(Qt5 REQUIRED
     Test
 )
 
-add_compile_options(-v)
+# add_compile_options(-v)
 
 # Immediately set the version.h header
 configure_file(${CMAKE_CURRENT_LIST_DIR}/src/version.h.in
@@ -50,7 +50,7 @@ list(APPEND APP_RES)
 
 list(APPEND APP_OTHER)
 
-find_package(qosis CONFIG REQUIRED 1.0.0.0)
+find_package(qosis CONFIG REQUIRED 1.0.4)
 
 if (APPLE)
     set(APP_ICON "${MACOSX_BUNDLE_ICON_FILE}")

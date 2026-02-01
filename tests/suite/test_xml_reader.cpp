@@ -19,7 +19,7 @@ void TestXmlReader::testReadingFile()
     QVERIFY(reader != NULL);
     qDebug() << reader->reader()->hasError() << reader->reader()->errorString();
     QVERIFY(! reader->reader()->hasError());
-    OsisStructure* data = BibleSingleton::getInstance()->osis();
+    QOsisStructure* data = BibleSingleton::getInstance()->osis();
     QVERIFY(data->bookCount() > 0);
     QVERIFY(data->chapterCount() > 0);
     QVERIFY(data->verseCount() > 0);
@@ -30,7 +30,7 @@ void TestXmlReader::testDebug()
 {
     // Not working as expected, still giving pointer addresses.
 #ifdef QT_DEBUG
-    OsisStructure* structure = BibleSingleton::getInstance()->osis();
+    QOsisStructure* structure = BibleSingleton::getInstance()->osis();
     qDebug() << structure;
     qDebug() << structure->book("Gen");
     qDebug() << structure->book("Gen")->chapter(1);

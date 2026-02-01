@@ -51,7 +51,7 @@ void MainWindow::setup()
     connect(this->ui->btnQuit, SIGNAL(clicked()), this, SLOT(aboutToClose()));
     connect(this->ui->btnOpen, SIGNAL(clicked()), this, SLOT(openText()));
 
-    _osis_hash = QHash<QString, QOsisReader*>();
+    _osis_hash = QHash<QString, QOsis*>();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -100,9 +100,16 @@ void MainWindow::loadFile(const QString path)
         qWarning(warning.toLatin1());
         return;
     }
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QOsisReader* reader = new QOsisReader();
-//        _osis_hash.insert(path, reader);
-        file.close();
-    }
+    QOsis* osis = new QOsis(path);
+    _osis_hash.insert(path, osis);
+    this->setupOsisFile(path);
+}
+
+void MainWindow::setupOsisFile(const QString path, bool fully_render)
+{
+    qDebug() << Q_FUNC_INFO << path << fully_render;
+    QOsisReader* reader = _osis_hash.value(path)->reader();
+    qDebug() << reader->isValidPath() << "is a valid path";
+    QOsisStructure* structure = reader->getOsisData();
+    qDebug() << structure->title();
 }

@@ -40,11 +40,11 @@ public:
 
 };
 
-class OsisVerse {
+class QOsisVerse : public OsisCommon {
 public:
-    OsisVerse();
+    QOsisVerse();
 
-    void consumeAttributes(QXmlStreamAttributes attrs);
+    void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
 
     QString verse() const;
     void setVerse(const QString &verse);
@@ -56,7 +56,7 @@ public:
     int characterCount();
 
 #ifdef QT_DEBUG
-    const friend QDebug operator<<(QDebug dbg,  OsisVerse &verse);
+    const friend QDebug operator<<(QDebug dbg,  QOsisVerse &verse);
 #endif
 
 
@@ -65,14 +65,14 @@ private:
     int _versenum;
 };
 
-class OsisChapter {
+class QOsisChapter : public OsisCommon  {
 public:
-    OsisChapter();
+    QOsisChapter();
 
-    void consumeAttributes(QXmlStreamAttributes attrs);
+    void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
 
     void addVerse(int verseNum, QString verseText);
-    OsisVerse* verse(int versenum);
+    QOsisVerse* verse(int versenum);
 
     int chapter() const;
     void setChapter(int chapter);
@@ -81,22 +81,22 @@ public:
     QList<int> verses();
 
 #ifdef QT_DEBUG
-    const friend QDebug operator<<(QDebug dbg,  OsisChapter &chapter);
+    const friend QDebug operator<<(QDebug dbg,  QOsisChapter &chapter);
 #endif
 
 
 private:
-    QMap<int, OsisVerse*> _data;
+    QMap<int, QOsisVerse*> _data;
     int _chapter;
 };
 
-class OsisBook {
+class QOsisBook : public OsisCommon {
 public:
-    OsisBook();
+    QOsisBook();
 
-    void consumeAttributes(QXmlStreamAttributes attrs);
+    void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
     void addChapter(int chapter);
-    OsisChapter* chapter(int chapterNum);
+    QOsisChapter* chapter(int chapterNum);
 
     QString name() const;
     void setName(const QString &name);
@@ -105,18 +105,18 @@ public:
 
     int chapterCount();
 #ifdef QT_DEBUG
-    const friend QDebug operator<<(QDebug dbg,  OsisBook &book);
+    const friend QDebug operator<<(QDebug dbg,  QOsisBook &book);
 #endif
 
 private:
     QString _name;
-    QMap<int, OsisChapter*> _data;
+    QMap<int, QOsisChapter*> _data;
 
 };
 
-class OsisStructure : public OsisCommon {
+class QOsisStructure : public OsisCommon {
 public:
-    OsisStructure();
+    QOsisStructure();
 
     QString osisIDWork() const;
     void setOsisIDWork(const QString &osisIDWork);
@@ -132,16 +132,19 @@ public:
     void setTitle(const QString &title);
 
     void addBook(const QString name);
-    OsisBook *book(QString name);
+    QOsisBook *book(QString name);
 
     int bookCount();
+
     int chapterCount();
+
     int verseCount();
+
     bool isEmpty();
 
-    QList<OsisVerse*> find(const QString book, const int chapter, const int verse, int additional = 0);
+    QList<QOsisVerse*> find(const QString book, const int chapter, const int verse, int additional = 0);
 #ifdef QT_DEBUG
-    const friend QDebug operator<<(QDebug dbg,  OsisStructure &structure);
+    const friend QDebug operator<<(QDebug dbg,  QOsisStructure &structure);
 #endif
 
 private:
@@ -150,7 +153,7 @@ private:
      * A Book identifier is the name. Chapters are integers (1...N) and verses are as well.
      *
      */
-    QHash<QString, OsisBook*> _data;
+    QHash<QString, QOsisBook*> _data;
 
     QString _osisIDWork;
     QString _lang;

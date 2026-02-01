@@ -5,14 +5,16 @@ using namespace QOSIS;
 
 QOsisReader::QOsisReader() :
     QOsisCommons(""),
-    _schema(QOSIS::Globals::XML_NAMESPACE)
+    _schema(QOSIS::Globals::XML_NAMESPACE),
+    _reader(NULL)
 {
 
 }
 
 QOsisReader::QOsisReader(const QString path) :
     QOsisCommons(path),
-    _schema(QOSIS::Globals::XML_NAMESPACE)
+    _schema(QOSIS::Globals::XML_NAMESPACE),
+    _reader(NULL)
 {
     this->initReader();
 }
@@ -24,9 +26,12 @@ QOsisReader::~QOsisReader()
 
 void QOsisReader::initReader()
 {
+    qDebug() << Q_FUNC_INFO << this->isValidPath();
     // Read when conditions allow
     if (this->isValidPath()) {
+        qDebug() << "Reader" << _reader;
         if (_reader == NULL) {
+            qDebug() << "Reader is NULL";
             QFile* f = this->file();
             f->open(QIODevice::ReadOnly);
             QByteArray arr = f->readAll();
@@ -50,14 +55,15 @@ bool QOsisReader::validate()
     return v.validateXml() == QOSIS::ENUMS::Validation::OK;
 }
 
-OsisStructure *QOsisReader::getOsisData()
+QOsisStructure *QOsisReader::getOsisData()
 {
     return this->_data;
 }
 
 void QOsisReader::parseXml()
 {
-    _data = new OsisStructure();
+    qDebug() << Q_FUNC_INFO;
+    _data = new QOsisStructure();
     _tags = QList<QStringRef>();
     _reader->setNamespaceProcessing(false);
     while(! _reader->atEnd()) {
@@ -91,7 +97,7 @@ void QOsisReader::processXml(QStringRef tagname)
                     QString val = attr.value().toString();
                     QStringList parts = val.split(".");
                     int chapter = parts.at(1).toInt();
-                    OsisBook* book = _data->book(parts.at(0));
+                    QOsisBook* book = _data->book(parts.at(0));
                     book->addChapter(chapter);
                 }
             }
@@ -102,8 +108,8 @@ void QOsisReader::processXml(QStringRef tagname)
                     QStringList parts = val.split(".");
                     int chapter = parts.at(1).toInt();
                     int verse = parts.at(2).toInt();
-                    OsisBook* book = _data->book(parts.at(0));
-                    OsisChapter* chap = book->chapter(chapter);
+                    QOsisBook* book = _data->book(parts.at(0));
+                    QOsisChapter* chap = book->chapter(chapter);
                     chap->addVerse(verse, _reader->readElementText());
                 }
             }

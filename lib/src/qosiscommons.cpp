@@ -37,82 +37,79 @@ void QOsisCommons::processPath()
 }
 
 
-OsisBook::OsisBook()
+QOsisBook::QOsisBook() :
+    OsisCommon()
 {
 }
 
-void OsisBook::consumeAttributes(QXmlStreamAttributes attrs)
+void QOsisBook::addChapter(int chapter)
 {
-
-}
-
-void OsisBook::addChapter(int chapter)
-{
-    OsisChapter* chap = new OsisChapter();
+    QOsisChapter* chap = new QOsisChapter();
     chap->setChapter(chapter);
     this->_data.insert(chapter, chap);
 }
 
-OsisChapter *OsisBook::chapter(int chapterNum)
+QOsisChapter *QOsisBook::chapter(int chapterNum)
 {
     return this->_data.value(chapterNum);
 }
-QString OsisBook::name() const
+QString QOsisBook::name() const
 {
     return _name;
 }
 
-void OsisBook::setName(const QString &name)
+void QOsisBook::setName(const QString &name)
 {
     _name = name;
 }
 
-QList<int> OsisBook::chapters()
+QList<int> QOsisBook::chapters()
 {
     return this->_data.keys();
 }
 
-int OsisBook::chapterCount()
+int QOsisBook::chapterCount()
 {
     return this->_data.keys().count();
 }
 
 
 
-OsisStructure::OsisStructure()
+QOsisStructure::QOsisStructure() :
+    OsisCommon()
 {
 
 }
 
-QString OsisStructure::osisIDWork() const
+QString QOsisStructure::osisIDWork() const
 {
     return _osisIDWork;
 }
 
-void OsisStructure::setOsisIDWork(const QString &osisIDWork)
+void QOsisStructure::setOsisIDWork(const QString &osisIDWork)
 {
     _osisIDWork = osisIDWork;
 }
-QString OsisStructure::lang() const
+QString QOsisStructure::lang() const
 {
     return _lang;
 }
 
-void OsisStructure::setLang(const QString &lang)
+void QOsisStructure::setLang(const QString &lang)
 {
     _lang = lang;
 }
-QString OsisStructure::osisRefWork() const
+QString QOsisStructure::osisRefWork() const
 {
     return _osisRefWork;
 }
 
-void OsisStructure::setOsisRefWork(const QString &osisRefWork)
+void QOsisStructure::setOsisRefWork(const QString &osisRefWork)
 {
     _osisRefWork = osisRefWork;
 }
 
-void OsisStructure::consumeAttributes(QXmlStreamAttributes attrs)
+void QOsisStructure::consumeAttributes(QXmlStreamAttributes attrs)
 {
     foreach(QXmlStreamAttribute attr, attrs) {
         if (attr.name() == "lang")
@@ -123,37 +120,37 @@ void OsisStructure::consumeAttributes(QXmlStreamAttributes attrs)
             this->setOsisRefWork(attr.value().toString());
     }
 }
-QString OsisStructure::title() const
+QString QOsisStructure::title() const
 {
     return _title;
 }
 
-void OsisStructure::setTitle(const QString &title)
+void QOsisStructure::setTitle(const QString &title)
 {
     _title = title;
 }
 
-void OsisStructure::addBook(const QString name)
+void QOsisStructure::addBook(const QString name)
 {
-    OsisBook* book = new OsisBook();
+    QOsisBook* book = new QOsisBook();
     book->setName(name);
     this->_data.insert(name, book);
 }
 
-OsisBook* OsisStructure::book(QString name)
+QOsisBook* QOsisStructure::book(QString name)
 {
     return this->_data.value(name);
 }
 
-int OsisStructure::bookCount()
+int QOsisStructure::bookCount()
 {
     return this->_data.keys().count();
 }
 
-int OsisStructure::chapterCount()
+int QOsisStructure::chapterCount()
 {
     int c = 0;
-    OsisBook* book;
+    QOsisBook* book;
     foreach(QString key, this->_data.keys()) {
         book = this->_data.value(key);
         c += book->chapterCount();
@@ -161,11 +158,11 @@ int OsisStructure::chapterCount()
     return c;
 }
 
-int OsisStructure::verseCount()
+int QOsisStructure::verseCount()
 {
     int c = 0;
-    OsisChapter* chap;
-    OsisBook* book;
+    QOsisChapter* chap;
+    QOsisBook* book;
     foreach(QString key, this->_data.keys()) {
         book = this->_data.value(key);
         foreach(int chapkey, book->chapters()) {
@@ -177,18 +174,18 @@ int OsisStructure::verseCount()
     return c;
 }
 
-bool OsisStructure::isEmpty()
+bool QOsisStructure::isEmpty()
 {
     return this->_data.isEmpty();
 }
 
-QList<OsisVerse *> OsisStructure::find(const QString book, const int chapter, const int verse, int additional)
+QList<QOsisVerse *> QOsisStructure::find(const QString book, const int chapter, const int verse, int additional)
 {
-    QList<OsisVerse*> verses;
+    QList<QOsisVerse*> verses;
     if(additional < 0)
         additional = 0;
-    OsisBook* osisbook = this->book(book);
-    OsisChapter* osischap = osisbook->chapter(chapter);
+    QOsisBook* osisbook = this->book(book);
+    QOsisChapter* osischap = osisbook->chapter(chapter);
     for(int i = verse; i <= additional; ++i) {
         verses.append(osischap->verse(i));
     }
@@ -197,25 +194,25 @@ QList<OsisVerse *> OsisStructure::find(const QString book, const int chapter, co
 }
 
 #ifdef QT_DEBUG
-const QDebug operator<<(QDebug dbg,  OsisVerse &verse)
+const QDebug operator<<(QDebug dbg,  QOsisVerse &verse)
 {
     QString name = QString("Verse %1 (%2)").arg(QString(verse.verseNum())).arg(verse.verse());
     return dbg.nospace() << name;
 }
 
-const QDebug operator<<(QDebug dbg,  OsisChapter &chapter)
+const QDebug operator<<(QDebug dbg,  QOsisChapter &chapter)
 {
     QString name = QString("%1 (%2 verses)").arg(QString(chapter.chapter()), chapter.verseCount());
     return dbg.nospace() << name;
 }
 
-const QDebug operator<<(QDebug dbg,  OsisBook &book)
+const QDebug operator<<(QDebug dbg,  QOsisBook &book)
 {
     QString name = QString("%1 (%2 chapters)").arg(book.name(), book.chapterCount());
     return dbg.nospace() << name;
 }
 
-const QDebug operator<<(QDebug dbg,  OsisStructure &structure)
+const QDebug operator<<(QDebug dbg,  QOsisStructure &structure)
 {
     QString name = QString("%1 (%2) %3").arg(structure.title()).arg(structure.lang());
     if (structure.isEmpty())
@@ -233,36 +230,32 @@ const QDebug operator<<(QDebug dbg,  OsisStructure &structure)
 #endif
 
 
-OsisVerse::OsisVerse()
+QOsisVerse::QOsisVerse() :
+    OsisCommon()
 {
 
 }
 
-void OsisVerse::consumeAttributes(QXmlStreamAttributes attrs)
-{
-    Q_UNUSED(attrs);
-    // No attributes used here, so this won't do anything.
-}
-QString OsisVerse::verse() const
+QString QOsisVerse::verse() const
 {
     return _verse;
 }
 
-void OsisVerse::setVerse(const QString &verse)
+void QOsisVerse::setVerse(const QString &verse)
 {
     _verse = verse;
 }
-int OsisVerse::verseNum() const
+int QOsisVerse::verseNum() const
 {
     return _versenum;
 }
 
-void OsisVerse::setVerseNum(int versenum)
+void QOsisVerse::setVerseNum(int versenum)
 {
     _versenum = versenum;
 }
 
-int OsisVerse::characterCount()
+int QOsisVerse::characterCount()
 {
     return this->_verse.count();
 }
@@ -270,44 +263,40 @@ int OsisVerse::characterCount()
 
 
 
-OsisChapter::OsisChapter()
+QOsisChapter::QOsisChapter() :
+    OsisCommon()
 {
 
 }
 
-void OsisChapter::consumeAttributes(QXmlStreamAttributes attrs)
+void QOsisChapter::addVerse(int verseNum, QString verseText)
 {
-
-}
-
-void OsisChapter::addVerse(int verseNum, QString verseText)
-{
-    OsisVerse* v = new OsisVerse();
+    QOsisVerse* v = new QOsisVerse();
     v->setVerse(verseText);
     v->setVerseNum(verseNum);
     this->_data.insert(verseNum, v);
 }
 
-OsisVerse* OsisChapter::verse(int versenum)
+QOsisVerse* QOsisChapter::verse(int versenum)
 {
     return this->_data.value(versenum);
 }
-int OsisChapter::chapter() const
+int QOsisChapter::chapter() const
 {
     return _chapter;
 }
 
-void OsisChapter::setChapter(int chapter)
+void QOsisChapter::setChapter(int chapter)
 {
     _chapter = chapter;
 }
 
-int OsisChapter::verseCount()
+int QOsisChapter::verseCount()
 {
     return this->_data.keys().count();
 }
 
-QList<int> OsisChapter::verses()
+QList<int> QOsisChapter::verses()
 {
     return this->_data.keys();
 }

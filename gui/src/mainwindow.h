@@ -43,6 +43,19 @@ private slots:
 private:
     void setup();
     void loadFile(const QString path);
+    /*!
+     * \brief setupOsisFile takes the osis path (now recorded in hash) and renders it to view
+     * \param path
+     * \param fully_render boolean that if true, will create all verse tree nodes, otherwise will create them only when chapter is opened.
+     *
+     * Using the QStandardItemModel, we build a tree of:
+     *  - book
+     *      + books within the book
+     *          + chapters within book
+     *              + verses within book
+     *
+     */
+    void setupOsisFile(const QString path, bool fully_render = false);
 
     Ui::MainWindow *ui;
     QMenu *mainMenu;
@@ -53,7 +66,7 @@ private:
     Preferences *preferencesWindow;
     QStatusBar *statusBar;
 
-    QHash<QString, QOsisReader*> _osis_hash;
+    QHash<QString, QOsis*> _osis_hash;
 };
 
 #endif // MAINWINDOW_H
