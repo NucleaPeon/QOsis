@@ -4,13 +4,15 @@
 using namespace QOSIS;
 
 QOsisReader::QOsisReader() :
-    QOsisCommons("")
+    QOsisCommons(""),
+    _schema(QOSIS::Globals::XML_NAMESPACE)
 {
 
 }
 
 QOsisReader::QOsisReader(const QString path) :
-    QOsisCommons(path)
+    QOsisCommons(path),
+    _schema(QOSIS::Globals::XML_NAMESPACE)
 {
     this->initReader();
 }

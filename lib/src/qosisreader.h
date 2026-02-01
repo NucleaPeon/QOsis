@@ -53,7 +53,7 @@ public:
 private:
     void parseXml();
     void processXml(QStringRef tagname);
-    const QString _schema = QOSIS::Globals::XML_NAMESPACE;
+    const QString _schema;
     QXmlStreamReader* _reader;
     QList<QStringRef> _tags;
     OsisStructure* _data;

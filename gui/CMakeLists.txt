@@ -51,7 +51,6 @@ list(APPEND APP_RES)
 list(APPEND APP_OTHER)
 
 find_package(qosis CONFIG REQUIRED 1.0.0.0)
-target_link_libraries(${PROJECT_NAME} qosis)
 
 if (APPLE)
     set(APP_ICON "${MACOSX_BUNDLE_ICON_FILE}")
@@ -109,7 +108,7 @@ target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Test)
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE .. )
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
-
+target_link_libraries(${PROJECT_NAME} qosis)
 
 
 if(APPLE)

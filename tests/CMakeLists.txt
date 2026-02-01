@@ -12,7 +12,7 @@ project(qosis-tests
 )
 
 include(GNUInstallDirs)
-
+include(CTest)
 
 find_package(Qt5 REQUIRED
     Core
@@ -64,9 +64,10 @@ add_executable(${PROJECT_NAME}
     ${TEST_SOURCES}
 )
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Xml Qt5::XmlPatterns Qt5::Test)
-include_directories(BEFORE ${CMAKE_CURRENT_LIST_DIR}/../lib/src)
+find_package(qosis CONFIG REQUIRED 1.0.0.0)
 target_link_libraries(${PROJECT_NAME} qosis)
+
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Xml Qt5::XmlPatterns Qt5::Test)
 
 # Uncomment this once we can detect whether package is found and if not, use relative paths instead.
 

@@ -8,8 +8,7 @@ project(qosis
 message(STATUS "Building OSIS Library...")
 message(STATUS "${CMAKE_C_COMPILER} C Compiler")
 message(STATUS "${CMAKE_CXX_COMPILER} C++ Compiler")
-
-message(STATUS "${CMAKE_CURRENT_LIST_DIR} LIST_DIR")
+include(GNUInstallDirs)  # REQUIRED TO INSTALL PKGCONFIG TO PROPER DIR, and after LANGUAGES is defined
 
 # Immediately set the version.h header
 configure_file(${CMAKE_CURRENT_LIST_DIR}/version.h.in
@@ -71,7 +70,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION}
 
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE .. )
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${QOSIS_HEADERS}")
-configure_file(${CMAKE_CURRENT_LIST_DIR}/src/qosis.pc.in ${CMAKE_CURRENT_LIST_DIR}/src/qosis.pc @ONLY)
+configure_file(src/qosis.pc.in src/qosis.pc @ONLY)
 
 install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -88,18 +87,17 @@ set(SYSCONFIG_INSTALL_DIR ${CMAKE_INSTALL_SYSCONFDIR}/${PROJECT_NAME}
     CACHE PATH "Location of configuration files" )
 
 message(STATUS "${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake")
-configure_package_config_file(
-    ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake.in
+configure_package_config_file(${PROJECT_NAME}-config.cmake.in
     ${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}-config.cmake
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
     PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR)
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_LIST_DIR}-config-version.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
   VERSION ${VERSION}
   COMPATIBILITY SameMajorVersion )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME} )
 install(FILES ${CMAKE_CURRENT_LIST_DIR}/src/qosis.pc DESTINATION
         ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
