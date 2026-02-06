@@ -8,6 +8,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QFileDialog>
+#include <QtWidgets/QTreeView>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QCloseEvent>
 
@@ -18,6 +19,9 @@
 
 namespace Ui {
 class MainWindow;
+const static QIcon ICON_BOOK = QIcon();
+const static QIcon ICON_CHAPTER = QIcon();
+const static QIcon ICON_VERSE = QIcon();
 }
 
 /*!
@@ -67,6 +71,7 @@ private:
     Preferences *preferencesWindow;
     QStatusBar *statusBar;
     QStandardItemModel* _osis_view_model;
+    QItemSelectionModel* _selection_model;
 
     QHash<QString, QOsis*> _osis_hash;
 };

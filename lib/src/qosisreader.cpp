@@ -26,12 +26,9 @@ QOsisReader::~QOsisReader()
 
 void QOsisReader::initReader()
 {
-    qDebug() << Q_FUNC_INFO << this->isValidPath();
     // Read when conditions allow
     if (this->isValidPath()) {
-        qDebug() << "Reader" << _reader;
         if (_reader == NULL) {
-            qDebug() << "Reader is NULL";
             QFile* f = this->file();
             f->open(QIODevice::ReadOnly);
             QByteArray arr = f->readAll();

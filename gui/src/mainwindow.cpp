@@ -52,7 +52,9 @@ void MainWindow::setup()
     connect(this->ui->btnOpen, SIGNAL(clicked()), this, SLOT(openText()));
 
     _osis_view_model = new QStandardItemModel();
+
     this->ui->osisTreeView->setModel(_osis_view_model);
+    _selection_model = this->ui->osisTreeView->selectionModel();
     _osis_hash = QHash<QString, QOsis*>();
 }
 
@@ -104,14 +106,39 @@ void MainWindow::loadFile(const QString path)
     }
     QOsis* osis = new QOsis(path);
     _osis_hash.insert(path, osis);
-    this->setupOsisFile(path);
+    this->setupOsisFile(path, true);
 }
 
 void MainWindow::setupOsisFile(const QString path, bool fully_render)
 {
     QOsisReader* reader = _osis_hash.value(path)->reader();
     QOsisStructure* structure = reader->getOsisData();
-    foreach(const QString str, structure->books())
-        qDebug() << str;
+    foreach(const QString str, structure->books()) {
+        QStandardItem* item = new QStandardItem(Ui::ICON_BOOK, str);
+        item->setEditable(false);
+        this->_osis_view_model->appendRow(item);
+        foreach(int chapter, structure->book(str)->chapters()) {
+            QString itemName = QString("Chapter %1").arg(chapter);
+            QStandardItem* chapterItem = new QStandardItem(Ui::ICON_CHAPTER, itemName);
+            chapterItem->setEditable(false);
+            item->appendRow(chapterItem);
+            // This QSI handles fully rendering. If true, it will be a verse, or if false,
+            // we listen to chapter and render verses when chapter is expanded.
+            QStandardItem *dummyItem = new QStandardItem();
+            chapterItem->appendRow(dummyItem);
+            if (fully_render) {
+                // Render verses within it.
+                chapterItem->removeRow(dummyItem->row());
+                foreach(int verse, structure->book(str)->chapter(chapter)->verses()) {
+                    QString verseName = QString("Verse %1").arg(verse);
+                    QStandardItem *verseItem = new QStandardItem(Ui::ICON_VERSE, verseName);
+                    verseItem->setEditable(false);
+                    chapterItem->appendRow(verseItem);
+                    qDebug() << "chapter" << chapter << "fully rendered";
+                }
+            }
+        }
+    }
+    // QTreeView collapse/expanded signal?
     qDebug() << "Done.";
 }
