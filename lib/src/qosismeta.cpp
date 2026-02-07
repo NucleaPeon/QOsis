@@ -3,13 +3,23 @@
 using namespace QOSIS;
 
 QOsis::QOsis() :
-    QOsisCommons("")
+    QOsisCommons(""),
+    _reader(NULL),
+    _writer(NULL),
+    _importer(NULL),
+    _exporter(NULL),
+    _validator(NULL)
 {
 
 }
 
 QOsis::QOsis(const QString path) :
-    QOsisCommons(path)
+    QOsisCommons(path),
+    _reader(NULL),
+    _writer(NULL),
+    _importer(NULL),
+    _exporter(NULL),
+    _validator(NULL)
 {
 }
 
@@ -20,27 +30,42 @@ QOsis::~QOsis()
 
 QOsisReader *QOsis::reader()
 {
-    return new QOsisReader(path());
+    if (_reader == NULL) {
+        _reader = new QOsisReader(path());
+    }
+    return _reader;
 }
 
 QOsisWriter *QOsis::writer()
 {
-    return new QOsisWriter(path());
+    if (_writer == NULL) {
+        _writer = new QOsisWriter(path());
+    }
+    return _writer;
 }
 
 QOsisExporter *QOsis::exporter()
 {
-    return new QOsisExporter(path());
+    if (_exporter == NULL) {
+        _exporter = new QOsisExporter(path());
+    }
+    return _exporter;
 }
 
 QOsisImporter *QOsis::importer()
 {
-    return new QOsisImporter(path());
+    if (_importer == NULL) {
+        _importer = new QOsisImporter(path());
+    }
+    return _importer;
 }
 
 QOsisValidator *QOsis::validator()
 {
-    return new QOsisValidator(path());
+    if (_validator == NULL) {
+        _validator = new QOsisValidator(path());
+    }
+    return _validator;
 }
 
 

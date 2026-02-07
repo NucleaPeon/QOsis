@@ -34,6 +34,14 @@ public:
 
     QOsisValidator* validator();
 
+private:
+    QOsisReader* _reader;
+    QOsisWriter* _writer;
+    QOsisExporter* _exporter;
+    QOsisImporter* _importer;
+    QOsisValidator* _validator;
+
+
 };
 
 }

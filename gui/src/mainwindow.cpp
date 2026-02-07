@@ -6,6 +6,7 @@ using namespace QOSIS;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
+    _osis(NULL),
     ui(new Ui::MainWindow)
 {
     setup();
@@ -51,11 +52,13 @@ void MainWindow::setup()
     connect(this->ui->btnQuit, SIGNAL(clicked()), this, SLOT(aboutToClose()));
     connect(this->ui->btnOpen, SIGNAL(clicked()), this, SLOT(openText()));
 
+    this->ui->osisTextView->setTextInteractionFlags(Qt::TextSelectableByKeyboard | Qt::TextSelectableByMouse);
     _osis_view_model = new QStandardItemModel();
 
     this->ui->osisTreeView->setModel(_osis_view_model);
     _selection_model = this->ui->osisTreeView->selectionModel();
-    _osis_hash = QHash<QString, QOsis*>();
+    connect(_selection_model, SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            this, SLOT(selectionChange(QModelIndex,QModelIndex)));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -90,11 +93,27 @@ void MainWindow::openText()
         loadFile(path);
 }
 
+void MainWindow::selectionChange(QModelIndex selected, QModelIndex deselected)
+{
+    Q_UNUSED(deselected)
+    qDebug() << Q_FUNC_INFO << selected;
+    qDebug() << "parents: " << parents(selected);
+    int p = parents(selected);
+    if (p == MainWindow::Verse) {
+        // Display
+        QOsisStructure* structure = _osis->reader()->getOsisData();
+        QOsisBook* book = structure->book(selected.parent().parent().data().toString());
+        QOsisChapter* chap = book->chapter(selected.parent().row()+1);
+        QOsisVerse* verse = chap->verse(selected.row()+1);
+        this->ui->osisTextView->setPlainText(verse->verse());
+    }
+}
+
 
 void MainWindow::loadFile(const QString path)
 {
     qDebug() << Q_FUNC_INFO << path;
-    if (_osis_hash.contains(path)) {
+    if (_osis != NULL) {
         qDebug("File path already has been loaded");
         return; // TODO: Maybe show the loaded file in the ui (focus/view)
     }
@@ -104,41 +123,44 @@ void MainWindow::loadFile(const QString path)
         qWarning(warning.toLatin1());
         return;
     }
-    QOsis* osis = new QOsis(path);
-    _osis_hash.insert(path, osis);
-    this->setupOsisFile(path, true);
+    _osis = new QOsis(path);
+    this->setupOsisFile(path);
 }
 
-void MainWindow::setupOsisFile(const QString path, bool fully_render)
+void MainWindow::setupOsisFile(const QString path)
 {
-    QOsisReader* reader = _osis_hash.value(path)->reader();
+    QOsisReader* reader = _osis->reader();
     QOsisStructure* structure = reader->getOsisData();
     foreach(const QString str, structure->books()) {
         QStandardItem* item = new QStandardItem(Ui::ICON_BOOK, str);
         item->setEditable(false);
+        item->setData(str);
         this->_osis_view_model->appendRow(item);
         foreach(int chapter, structure->book(str)->chapters()) {
             QString itemName = QString("Chapter %1").arg(chapter);
             QStandardItem* chapterItem = new QStandardItem(Ui::ICON_CHAPTER, itemName);
             chapterItem->setEditable(false);
+            chapterItem->setData(chapter);
             item->appendRow(chapterItem);
             // This QSI handles fully rendering. If true, it will be a verse, or if false,
             // we listen to chapter and render verses when chapter is expanded.
-            QStandardItem *dummyItem = new QStandardItem();
-            chapterItem->appendRow(dummyItem);
-            if (fully_render) {
-                // Render verses within it.
-                chapterItem->removeRow(dummyItem->row());
-                foreach(int verse, structure->book(str)->chapter(chapter)->verses()) {
-                    QString verseName = QString("Verse %1").arg(verse);
-                    QStandardItem *verseItem = new QStandardItem(Ui::ICON_VERSE, verseName);
-                    verseItem->setEditable(false);
-                    chapterItem->appendRow(verseItem);
-                    qDebug() << "chapter" << chapter << "fully rendered";
-                }
+            foreach(int verse, structure->book(str)->chapter(chapter)->verses()) {
+                QString verseName = QString("Verse %1").arg(verse);
+                QStandardItem *verseItem = new QStandardItem(Ui::ICON_VERSE, verseName);
+                verseItem->setEditable(false);
+                verseItem->setData(verse);
+                chapterItem->appendRow(verseItem);
             }
         }
     }
-    // QTreeView collapse/expanded signal?
-    qDebug() << "Done.";
+}
+
+int MainWindow::parents(QModelIndex index)
+{
+    int parents = 0;
+    while (index.parent().isValid()) {
+        parents += 1;
+        index = index.parent();
+    }
+    return parents;
 }

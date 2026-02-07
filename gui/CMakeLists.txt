@@ -50,7 +50,7 @@ list(APPEND APP_RES)
 
 list(APPEND APP_OTHER)
 
-find_package(qosis CONFIG REQUIRED 1.0.8)
+find_package(qosis CONFIG REQUIRED 1.0.9)
 
 if (APPLE)
     set(APP_ICON "${MACOSX_BUNDLE_ICON_FILE}")

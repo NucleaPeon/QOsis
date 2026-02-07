@@ -24,6 +24,8 @@ const static QIcon ICON_CHAPTER = QIcon();
 const static QIcon ICON_VERSE = QIcon();
 }
 
+
+
 /*!
  * \brief The MainWindow class shows and configures the main application
  *
@@ -33,10 +35,13 @@ const static QIcon ICON_VERSE = QIcon();
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    Q_ENUMS(ItemType)
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    // ItemType can also refer to # of parents a QSI has
+    enum ItemType { Book = 0, Chapter = 1, Verse = 2};
 
 protected:
     void closeEvent(QCloseEvent *);
@@ -44,6 +49,7 @@ protected:
 private slots:
     void aboutToClose();
     void openText();
+    void selectionChange(QModelIndex selected, QModelIndex deselected);
 
 private:
     void setup();
@@ -51,7 +57,6 @@ private:
     /*!
      * \brief setupOsisFile takes the osis path (now recorded in hash) and renders it to view
      * \param path
-     * \param fully_render boolean that if true, will create all verse tree nodes, otherwise will create them only when chapter is opened.
      *
      * Using the QStandardItemModel, we build a tree of:
      *  - book
@@ -60,7 +65,8 @@ private:
      *              + verses within book
      *
      */
-    void setupOsisFile(const QString path, bool fully_render = false);
+    void setupOsisFile(const QString path);
+    int parents(QModelIndex index);
 
     Ui::MainWindow *ui;
     QMenu *mainMenu;
@@ -73,7 +79,7 @@ private:
     QStandardItemModel* _osis_view_model;
     QItemSelectionModel* _selection_model;
 
-    QHash<QString, QOsis*> _osis_hash;
+    QOsis* _osis;
 };
 
 #endif // MAINWINDOW_H
