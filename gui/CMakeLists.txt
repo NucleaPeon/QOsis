@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(qosis-gui
-        VERSION 0.0.0.2
+        VERSION 0.0.1.0
         LANGUAGES C CXX
         DESCRIPTION "OSIS (Open Scriptural Information Standard™) Graphical User Interface"
 )
