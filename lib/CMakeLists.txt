@@ -96,6 +96,7 @@ write_basic_package_version_file(
   VERSION ${VERSION}
   COMPATIBILITY SameMajorVersion )
 
+install(TARGETS qosis DESTINATION lib)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME} )

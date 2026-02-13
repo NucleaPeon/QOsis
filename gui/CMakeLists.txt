@@ -39,7 +39,8 @@ list(APPEND APP_HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/src/about.h
     ${CMAKE_CURRENT_LIST_DIR}/src/cocoainitializer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/mainwindow.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/preferences.h)
+    ${CMAKE_CURRENT_LIST_DIR}/src/preferences.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/version.h)
 
 list(APPEND APP_UIS
     ${CMAKE_CURRENT_LIST_DIR}/src/about.ui
@@ -104,12 +105,13 @@ else()
         )
 endif()
 
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Test)
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE .. )
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
 target_link_libraries(${PROJECT_NAME} qosis)
-
 
 if(APPLE)
         find_package(Qt5 REQUIRED MacExtras)

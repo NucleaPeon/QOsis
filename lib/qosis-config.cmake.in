@@ -8,7 +8,7 @@ set(qosis_FOUND FALSE)
 find_path(qosis_INCLUDE_DIR NAMES qosis.h PATH_SUFFIXES include)
 find_library(qosis_LIBRARY NAMES qosis)
 
-if (qpsos_INCLUDE_DIR AND qosis_LIBRARY)
+if (qosis_INCLUDE_DIR AND qosis_LIBRARY)
     set(qosis_FOUND TRUE)
 endif()
 
