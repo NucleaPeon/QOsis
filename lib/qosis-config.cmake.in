@@ -1,0 +1,18 @@
+set(qosis_VERSION @VERSION@)
+
+@PACKAGE_INIT@
+
+set(qosis_FOUND FALSE)
+
+# Set variables needed for the package configuration
+find_path(qosis_INCLUDE_DIR NAMES qosis.h PATH_SUFFIXES include)
+find_library(qosis_LIBRARY NAMES qosis)
+
+if (qpsos_INCLUDE_DIR AND qosis_LIBRARY)
+    set(qosis_FOUND TRUE)
+endif()
+
+# Create imported target for the package
+add_library(qosis INTERFACE IMPORTED)
+target_include_directories(qosis INTERFACE ${qosis_INCLUDE_DIR})
+target_link_libraries(qosis INTERFACE ${qosis_LIBRARY})
