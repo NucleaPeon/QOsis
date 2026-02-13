@@ -49,7 +49,8 @@ protected:
 private slots:
     void aboutToClose();
     void openText();
-    void selectionChange(QModelIndex selected, QModelIndex deselected);
+    void selectionChange(QItemSelection selected, QItemSelection deselected);
+    void selectionClicked(QModelIndex selected);
 
 private:
     void setup();

@@ -56,14 +56,15 @@ void MainWindow::setup()
     _osis_view_model = new QStandardItemModel();
 
     this->ui->osisTreeView->setModel(_osis_view_model);
+    this->ui->osisTreeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     _selection_model = this->ui->osisTreeView->selectionModel();
-    connect(_selection_model, SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-            this, SLOT(selectionChange(QModelIndex,QModelIndex)));
+    connect(_selection_model, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+            this, SLOT(selectionChange(QItemSelection,QItemSelection)));
+    connect(this->ui->osisTreeView, SIGNAL(clicked(QModelIndex)), this, SLOT(selectionClicked(QModelIndex)));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    qDebug() << Q_FUNC_INFO;
     bool do_close = true;
     if (do_close) {
         event->accept();
@@ -74,7 +75,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::aboutToClose()
 {
-    qDebug() << Q_FUNC_INFO;
     this->close(); // Automtically calls closeEvent() to see if this is successful
 }
 
@@ -88,31 +88,38 @@ void MainWindow::openText()
     QStringList fileNames;
     if (dialog.exec())
         fileNames = dialog.selectedFiles();
-    qDebug() << fileNames;
     foreach(const QString path, fileNames)
         loadFile(path);
 }
 
-void MainWindow::selectionChange(QModelIndex selected, QModelIndex deselected)
+void MainWindow::selectionChange(QItemSelection selected, QItemSelection deselected)
 {
     Q_UNUSED(deselected)
-    qDebug() << Q_FUNC_INFO << selected;
-    qDebug() << "parents: " << parents(selected);
-    int p = parents(selected);
-    if (p == MainWindow::Verse) {
-        // Display
-        QOsisStructure* structure = _osis->reader()->getOsisData();
-        QOsisBook* book = structure->book(selected.parent().parent().data().toString());
-        QOsisChapter* chap = book->chapter(selected.parent().row()+1);
-        QOsisVerse* verse = chap->verse(selected.row()+1);
-        this->ui->osisTextView->setPlainText(verse->verse());
+    int p = -1;
+    QString text;
+    text.reserve(this->_selection_model->selectedIndexes().count());
+    foreach(QModelIndex idx, this->_selection_model->selectedIndexes()) {
+        p = parents(idx);
+        if (p == MainWindow::Verse) {
+            // Display in text pane. This may not be efficient for spanning
+            // multiple chapters or books, but it's proof of concept.
+            QOsisStructure* structure = _osis->reader()->getOsisData();
+            QOsisBook* book = structure->book(idx.parent().parent().data().toString());
+            QOsisChapter* chap = book->chapter(idx.parent().row()+1);
+            QOsisVerse* verse = chap->verse(idx.row()+1);
+            text.append(QString("%1\n\n").arg(verse->verse()));
+        }
     }
+    this->ui->osisTextView->setPlainText(text);
+}
+
+void MainWindow::selectionClicked(QModelIndex selected)
+{
 }
 
 
 void MainWindow::loadFile(const QString path)
 {
-    qDebug() << Q_FUNC_INFO << path;
     if (_osis != NULL) {
         qDebug("File path already has been loaded");
         return; // TODO: Maybe show the loaded file in the ui (focus/view)
