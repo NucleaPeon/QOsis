@@ -12,7 +12,6 @@
 
 #include "singletonbook.h"
 
-//#include "qosis.h"
 
 int main(int argc, char *argv[])
 {

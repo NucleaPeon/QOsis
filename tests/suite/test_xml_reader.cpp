@@ -2,6 +2,8 @@
 
 void TestXmlReader::initTestCase()
 {
+    qDebug() << "initializing test case";
+    this->meta = BibleSingleton::getInstance()->meta();
 }
 
 void TestXmlReader::testConstructors()

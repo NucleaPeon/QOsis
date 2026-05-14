@@ -11,7 +11,8 @@
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtXmlPatterns/QXmlSchema>
 
-#include <qosis.h>
+#include "qosis.h"
+#include "../singletonbook.h"
 
 using namespace QOSIS;
 using namespace QOSIS::Globals;

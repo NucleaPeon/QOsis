@@ -15,6 +15,7 @@ public:
     QOsisWriter(const QString path);
     ~QOsisWriter();
 
+
 private:
     QString _path;
 };

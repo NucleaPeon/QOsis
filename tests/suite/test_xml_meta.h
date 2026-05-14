@@ -5,7 +5,7 @@
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
 
-#include <qosis.h>
+#include "qosis.h"
 
 using namespace QOSIS;
 
