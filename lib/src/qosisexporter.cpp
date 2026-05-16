@@ -28,8 +28,8 @@ void QOsisExporter::writeJsonFile(QOsisStructure *st)
     QJsonObject obj = toJson(st);
     QJsonDocument doc = QJsonDocument(obj);
 
-    QFile file(this->path());
-    file.open(QIODevice::WriteOnly);
+    QFile file(QString("%1.json").arg(this->path()));
+    file.open(QIODevice::ReadWrite);
     if (_compression > 0) {
         QByteArray compressedData = qCompress(doc.toBinaryData(), _compression);
         file.write(compressedData);
