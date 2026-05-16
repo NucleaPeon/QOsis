@@ -3,6 +3,7 @@
 
 
 #include <QtCore/QObject>
+#include <QtCore/QDir>
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
 
@@ -17,7 +18,9 @@ class TestXmlExporter : public QObject {
 
 private slots:
     void initTestCase();
-    void testExportToJsonUsingYYJSON();
+    void testExportToJson();
+    void testExportToJsonFile();
+    void testExportToCompressedJsonFile();
 private:
     QOsis *meta;
 };

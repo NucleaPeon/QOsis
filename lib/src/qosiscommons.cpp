@@ -185,6 +185,11 @@ bool QOsisStructure::isEmpty()
     return this->_data.isEmpty();
 }
 
+QHash<QString, QOsisBook *> QOsisStructure::data()
+{
+    return this->_data;
+}
+
 QList<QOsisVerse *> QOsisStructure::find(const QString book, const int chapter, const int verse, int additional)
 {
     QList<QOsisVerse*> verses;

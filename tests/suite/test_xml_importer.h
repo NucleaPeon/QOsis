@@ -15,6 +15,9 @@ class TestXmlImporter : public QObject {
     Q_OBJECT
 
 private slots:
+    void testImportJsonFile();
+    void testImportJsonCompressedFile();
+
 
 private:
     QOsis *meta;

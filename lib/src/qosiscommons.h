@@ -143,6 +143,8 @@ public:
 
     bool isEmpty();
 
+    QHash<QString, QOsisBook*> data();
+
     QList<QOsisVerse*> find(const QString book, const int chapter, const int verse, int additional = 0);
 #ifdef QT_DEBUG
     const friend QDebug operator<<(QDebug dbg,  QOsisStructure &structure);
