@@ -1,5 +1,4 @@
 #include "qosisreader.h"
-#include <QtCore/QDebug>
 
 using namespace QOSIS;
 
@@ -17,6 +16,14 @@ QOsisReader::QOsisReader(const QString path) :
     _reader(NULL)
 {
     this->initReader();
+}
+
+QOsisReader::QOsisReader(const QString path, QOsisStructure *st) :
+    QOsisCommons(path),
+    _schema(QOSIS::Globals::XML_NAMESPACE),
+    _reader(NULL)
+{
+    this->_data = st;
 }
 
 QOsisReader::~QOsisReader()
@@ -59,7 +66,6 @@ QOsisStructure *QOsisReader::getOsisData()
 
 void QOsisReader::parseXml()
 {
-    qDebug() << Q_FUNC_INFO;
     _data = new QOsisStructure();
     _tags = QList<QStringRef>();
     _reader->setNamespaceProcessing(false);

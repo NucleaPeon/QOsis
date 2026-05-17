@@ -49,6 +49,8 @@ protected:
 private slots:
     void aboutToClose();
     void openText();
+    void exportToJson();
+    void importFromJson();
     void selectionChange(QItemSelection selected, QItemSelection deselected);
     void selectionClicked(QModelIndex selected);
 

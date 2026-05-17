@@ -1,4 +1,5 @@
 #include "qosisimporter.h"
+#include <QtCore/QDebug>
 
 using namespace QOSIS;
 
@@ -20,11 +21,12 @@ QOsisImporter::~QOsisImporter()
 
 }
 
-QOsisStructure* QOsisImporter::importJsonFile(int compression)
+QOsisStructure *QOsisImporter::importJsonFile(const QString path, int compression)
 {
-    QFile file(QString("%1.json").arg(this->path()));
+    QFile file(QString("%1.json").arg(path));
     QJsonDocument doc;
     if (file.exists())  {
+        qDebug() << "File exists";
         file.open(QIODevice::ReadOnly);
         QByteArray contents = file.readAll();
         if (compression >= 0) {
@@ -35,14 +37,16 @@ QOsisStructure* QOsisImporter::importJsonFile(int compression)
         }
         file.close();
     } else {
+        qDebug() << "File does not exist, NULL";
         return NULL;
     }
 
-    return processJson(doc);
+    return QOsisImporter::processJson(doc);
 }
 
 QOsisStructure *QOsisImporter::processJson(QJsonDocument doc)
 {
+    qDebug() << Q_FUNC_INFO;
     QOsisStructure *st = new QOsisStructure();
     QJsonObject root = doc.object();
     // Array of books

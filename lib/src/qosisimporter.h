@@ -18,10 +18,10 @@ public:
     QOsisImporter(const QString path);
     ~QOsisImporter();
 
-    QOsisStructure* importJsonFile(int compression = -1);
+    static QOsisStructure* importJsonFile(const QString path, int compression = -1);
 
 private:
-    QOsisStructure* processJson(QJsonDocument doc);
+    static QOsisStructure* processJson(QJsonDocument doc);
 };
 
 }

@@ -23,6 +23,16 @@ QOsis::QOsis(const QString path) :
 {
 }
 
+QOsis::QOsis(const QString path, QOsisStructure *st) :
+    QOsisCommons(path),
+    _reader(new QOsisReader(path, st)),
+    _writer(NULL),
+    _importer(NULL),
+    _exporter(NULL),
+    _validator(NULL)
+{
+}
+
 QOsis::~QOsis()
 {
 
