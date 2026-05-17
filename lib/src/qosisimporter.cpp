@@ -23,13 +23,12 @@ QOsisImporter::~QOsisImporter()
 
 QOsisStructure *QOsisImporter::importJsonFile(const QString path, int compression)
 {
-    QFile file(QString("%1.json").arg(path));
+    QFile file(path);
     QJsonDocument doc;
     if (file.exists())  {
-        qDebug() << "File exists";
         file.open(QIODevice::ReadOnly);
         QByteArray contents = file.readAll();
-        if (compression >= 0) {
+        if (compression > 0) {
             QByteArray uncompressedData = qUncompress(contents);
             doc = QJsonDocument::fromJson(uncompressedData);
         } else {
@@ -46,6 +45,7 @@ QOsisStructure *QOsisImporter::importJsonFile(const QString path, int compressio
 
 QOsisStructure *QOsisImporter::processJson(QJsonDocument doc)
 {
+    if (doc.isEmpty()) { return NULL; }
     qDebug() << Q_FUNC_INFO;
     QOsisStructure *st = new QOsisStructure();
     QJsonObject root = doc.object();

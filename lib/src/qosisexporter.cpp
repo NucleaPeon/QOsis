@@ -4,15 +4,13 @@
 using namespace QOSIS;
 
 QOsisExporter::QOsisExporter() :
-    QOsisCommons(""),
-    _compression(-1)
+    QOsisCommons("")
 {
 
 }
 
 QOsisExporter::QOsisExporter(const QString path) :
-    QOsisCommons(path),
-    _compression(-1)
+    QOsisCommons(path)
 {
 
 }
@@ -22,31 +20,20 @@ QOsisExporter::~QOsisExporter()
 
 }
 
-void QOsisExporter::writeJsonFile(QOsisStructure *st)
+void QOsisExporter::writeJsonFile(const QString path, QOsisStructure *st, int compression)
 {
-    QJsonObject obj = toJson(st);
+    QJsonObject obj = QOsisExporter::toJson(st);
     QJsonDocument doc = QJsonDocument(obj);
 
-    QFile file(QString("%1.json").arg(this->path()));
+    QFile file(path);
     file.open(QIODevice::ReadWrite);
-    if (_compression > 0) {
-        QByteArray compressedData = qCompress(doc.toBinaryData(), _compression);
+    if (compression > 0) {
+        QByteArray compressedData = qCompress(doc.toJson(), compression);
         file.write(compressedData);
     } else {
         file.write(doc.toJson());
     }
     file.close();
-}
-
-int QOsisExporter::compressionLevel()
-{
-    return _compression;
-}
-
-void QOsisExporter::setCompressionLevel(int compress)
-{
-    if (compress >= 0 && compress <= 9)
-        this->_compression = compress;
 }
 
 QJsonObject QOsisExporter::toJson(QOsisStructure *st)

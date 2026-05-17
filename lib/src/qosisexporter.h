@@ -8,7 +8,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonObject>
-
+#include <QtCore/QByteArray>
 
 namespace QOSIS {
 
@@ -23,12 +23,12 @@ public:
      * \brief writeJsonFile
      * \param st QOsisStructure*
      */
-    void writeJsonFile(QOsisStructure* st);
+    static void writeJsonFile(const QString path, QOsisStructure* st, int compression = 0);
 
     int compressionLevel();
     void setCompressionLevel(int compress);
 
-    QJsonObject toJson(QOsisStructure* st);
+    static QJsonObject toJson(QOsisStructure* st);
 
 private:
     int _compression;
