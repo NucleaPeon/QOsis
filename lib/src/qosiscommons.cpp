@@ -42,11 +42,12 @@ QOsisBook::QOsisBook() :
 {
 }
 
-void QOsisBook::addChapter(int chapter)
+QOsisChapter *QOsisBook::addChapter(int chapter)
 {
     QOsisChapter* chap = new QOsisChapter();
     chap->setChapter(chapter);
     this->_data.insert(chapter, chap);
+    return chap;
 }
 
 QOsisChapter *QOsisBook::chapter(int chapterNum)
@@ -130,12 +131,13 @@ void QOsisStructure::setTitle(const QString &title)
     _title = title;
 }
 
-void QOsisStructure::addBook(const QString name)
+QOsisBook *QOsisStructure::addBook(const QString name)
 {
     QOsisBook* book = new QOsisBook();
     book->setName(name);
     _order.append(name);
     this->_data.insert(name, book);
+    return book;
 }
 
 QOsisBook* QOsisStructure::book(QString name)
@@ -280,12 +282,13 @@ QOsisChapter::QOsisChapter() :
 
 }
 
-void QOsisChapter::addVerse(int verseNum, QString verseText)
+QOsisVerse *QOsisChapter::addVerse(int verseNum, QString verseText)
 {
     QOsisVerse* v = new QOsisVerse();
     v->setVerse(verseText);
     v->setVerseNum(verseNum);
     this->_data.insert(verseNum, v);
+    return v;
 }
 
 QOsisVerse* QOsisChapter::verse(int versenum)

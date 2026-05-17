@@ -3,6 +3,12 @@
 
 #include "qosiscommons.h"
 
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonArray>
+#include <QtCore/QJsonObject>
+#include <QtCore/QJsonValue>
+#include <QtCore/QFile>
+
 namespace QOSIS {
 
 class QOsisImporter : public QOsisCommons {
@@ -12,6 +18,10 @@ public:
     QOsisImporter(const QString path);
     ~QOsisImporter();
 
+    QOsisStructure* importJsonFile(int compression = -1);
+
+private:
+    QOsisStructure* processJson(QJsonDocument doc);
 };
 
 }

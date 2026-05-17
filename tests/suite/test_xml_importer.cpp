@@ -3,7 +3,6 @@
 
 void TestXmlImporter::testImportJsonFile()
 {
-
 }
 
 void TestXmlImporter::testImportJsonCompressedFile()

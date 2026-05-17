@@ -71,7 +71,7 @@ public:
 
     void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
 
-    void addVerse(int verseNum, QString verseText);
+    QOsisVerse* addVerse(int verseNum, QString verseText);
     QOsisVerse* verse(int versenum);
 
     int chapter() const;
@@ -95,7 +95,7 @@ public:
     QOsisBook();
 
     void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
-    void addChapter(int chapter);
+    QOsisChapter* addChapter(int chapter);
     QOsisChapter* chapter(int chapterNum);
 
     QString name() const;
@@ -131,7 +131,7 @@ public:
     QString title() const;
     void setTitle(const QString &title);
 
-    void addBook(const QString name);
+    QOsisBook* addBook(const QString name);
     QOsisBook *book(QString name);
 
     int bookCount();

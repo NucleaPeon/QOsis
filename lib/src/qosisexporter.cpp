@@ -24,7 +24,6 @@ QOsisExporter::~QOsisExporter()
 
 void QOsisExporter::writeJsonFile(QOsisStructure *st)
 {
-    qDebug() << Q_FUNC_INFO;
     QJsonObject obj = toJson(st);
     QJsonDocument doc = QJsonDocument(obj);
 
@@ -37,7 +36,6 @@ void QOsisExporter::writeJsonFile(QOsisStructure *st)
         file.write(doc.toJson());
     }
     file.close();
-
 }
 
 int QOsisExporter::compressionLevel()
@@ -53,8 +51,8 @@ void QOsisExporter::setCompressionLevel(int compress)
 
 QJsonObject QOsisExporter::toJson(QOsisStructure *st)
 {
-    qDebug() << Q_FUNC_INFO;
     QJsonObject obj;
+    QJsonArray barr = QJsonArray();
     for(int i = 0; i < st->bookCount(); ++i) {
         QOsisBook* book = st->book(st->books().at(i));
         QJsonArray carr;
@@ -66,8 +64,10 @@ QJsonObject QOsisExporter::toJson(QOsisStructure *st)
             }
             carr.append(varr);
         }
-        obj.insert(book->name(), carr);
+        QJsonObject bookObj = QJsonObject();
+        bookObj.insert(book->name(), carr);
+        barr.append(bookObj);
     }
-
+    obj.insert(st->title(), barr);
     return obj;
 }

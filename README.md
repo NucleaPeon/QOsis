@@ -75,6 +75,7 @@ TODO List
 [ ] CLI has not been worked on, so is non-functional. Make it functional.
 [ ] Add documentation and instructions on how to build them
 [ ] Maybe rename test filenames from test_xml_ to test_
+[ ] Have a test class that only measures benchmarks of different functions (ie: import,export,parse xml)
 
 
 License
