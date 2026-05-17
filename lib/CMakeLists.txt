@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(qosis
-        VERSION 1.0.11.2
+        VERSION 1.0.12.0
         LANGUAGES C CXX
         DESCRIPTION "OSIS (Open Scriptural Information Standard™) Library"
 )

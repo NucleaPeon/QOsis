@@ -46,7 +46,6 @@ QOsisStructure *QOsisImporter::importJsonFile(const QString path, int compressio
 QOsisStructure *QOsisImporter::processJson(QJsonDocument doc)
 {
     if (doc.isEmpty()) { return NULL; }
-    qDebug() << Q_FUNC_INFO;
     QOsisStructure *st = new QOsisStructure();
     QJsonObject root = doc.object();
     // Array of books
