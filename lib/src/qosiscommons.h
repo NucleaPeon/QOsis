@@ -118,6 +118,7 @@ private:
 class QOsisStructure : public OsisCommon {
 public:
     QOsisStructure();
+    QOsisStructure(const QUuid id);
 
     const QUuid id();
 
