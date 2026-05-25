@@ -77,9 +77,15 @@ int QOsisBook::chapterCount()
 
 
 QOsisStructure::QOsisStructure() :
+    _id(QUuid::createUuid()),
     OsisCommon()
 {
     _order = QList<QString>();
+}
+
+const QUuid QOsisStructure::id()
+{
+    return this->_id;
 }
 
 QString QOsisStructure::osisIDWork() const

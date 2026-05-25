@@ -6,6 +6,7 @@
 #include <QtCore/QString>
 #include <QtCore/QHash>
 #include <QtCore/QMap>
+#include <QtCore/QUuid>
 
 #include <QtCore/QXmlStreamAttributes>
 
@@ -118,6 +119,8 @@ class QOsisStructure : public OsisCommon {
 public:
     QOsisStructure();
 
+    const QUuid id();
+
     QString osisIDWork() const;
     void setOsisIDWork(const QString &osisIDWork);
 
@@ -167,7 +170,7 @@ private:
     QString _osisRefWork;
     QString _title;
     QString _subject;
-
+    QUuid _id;
 
 };
 
