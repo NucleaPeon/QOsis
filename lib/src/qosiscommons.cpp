@@ -83,6 +83,13 @@ QOsisStructure::QOsisStructure() :
     _order = QList<QString>();
 }
 
+QOsisStructure::QOsisStructure(const QUuid id) :
+    _id(id),
+    OsisCommon()
+{
+    _order = QList<QString>();
+}
+
 const QUuid QOsisStructure::id()
 {
     return this->_id;
