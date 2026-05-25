@@ -13,3 +13,4 @@ CMakeCache.txt
 *.dylib
 */build/*
 build/*
+*/version.h
