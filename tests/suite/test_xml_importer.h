@@ -6,7 +6,7 @@
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
 
-#include <qosis.h>
+#include "qosis.h"
 
 using namespace QOSIS;
 
@@ -15,6 +15,9 @@ class TestXmlImporter : public QObject {
     Q_OBJECT
 
 private slots:
+    void testImportJsonFile();
+    void testImportJsonCompressedFile();
+
 
 private:
     QOsis *meta;

@@ -6,7 +6,7 @@
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
 
-#include <qosis.h>
+#include "qosis.h"
 #include "../singletonbook.h"
 
 

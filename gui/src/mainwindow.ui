@@ -55,7 +55,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>381</width>
+                  <width>339</width>
                   <height>532</height>
                  </rect>
                 </property>
@@ -132,7 +132,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>382</width>
+                <width>341</width>
                 <height>534</height>
                </rect>
               </property>
@@ -151,6 +151,20 @@
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="btnExpToJson">
+          <property name="text">
+           <string>Export to Json</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnImpFromJson">
+          <property name="text">
+           <string>Import From Json</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <spacer name="verticalSpacer">
           <property name="orientation">

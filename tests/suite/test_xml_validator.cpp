@@ -7,6 +7,7 @@ void TestXmlValidator::initTestCase()
     char* argv = "";
     char** argvpp = &argv;
     app = new QCoreApplication(argc, argvpp);
+    this->meta = BibleSingleton::getInstance()->meta();
 }
 
 void TestXmlValidator::testSchemaValidation()

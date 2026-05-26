@@ -24,6 +24,7 @@ class QOsis : public QOsisCommons {
 public:
     explicit QOsis();
     QOsis(const QString path);
+    QOsis(const QString path, QOsisStructure* st);
     ~QOsis();
 
     QOsisReader* reader();

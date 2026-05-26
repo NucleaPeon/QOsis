@@ -69,14 +69,13 @@ void Class::ExampleFunction()
 TODO List
 =========
 
-    [ ] Ensure OSIS Licensing is not infringed with our license and include it in the project
-
-    [ ] GUI has non-functional about and preferences windows, only is used to read a file.
-        [ ] Include export and import functions
-    
-    [ ] CLI has not been worked on, so is non-functional. Make it functional.
-
-    [ ] Add documentation and instructions on how to build them
+[ ] Ensure OSIS Licensing is not infringed with our license and include it in the project
+[ ] GUI has non-functional about and preferences windows, only is used to read a file.
+    [ ] Include export and import functions
+[ ] CLI has not been worked on, so is non-functional. Make it functional.
+[ ] Add documentation and instructions on how to build them
+[ ] Maybe rename test filenames from test_xml_ to test_
+[ ] Have a test class that only measures benchmarks of different functions (ie: import,export,parse xml)
 
 
 License

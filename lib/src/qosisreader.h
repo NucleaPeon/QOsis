@@ -40,6 +40,7 @@ class QOsisReader : public QOsisCommons {
 public:
     explicit QOsisReader();
     QOsisReader(const QString path);
+    QOsisReader(const QString path, QOsisStructure* st);
     ~QOsisReader();
 
     /*!

@@ -2,7 +2,6 @@
 
 void TestXmlMeta::initTestCase()
 {
-    qDebug() << "initializing test case";
     this->meta = new QOsis();
 }
 
@@ -22,6 +21,48 @@ void TestXmlMeta::testGetters()
     QVERIFY(! this->meta->importer()->isValidPath());
     this->meta->setPath("://kjv.xml");
     QVERIFY(this->meta->isValidPath());
+}
+
+void TestXmlMeta::testLoadingOsisFile()
+{
+    QElapsedTimer timer;
+    timer.start();
+    BibleSingleton::getInstance()->initOsis("://kjv.xml");
+    qDebug() << "Initializing the Osis XML File took" << timer.elapsed() << "milliseconds";
+    timer.invalidate();
+    timer.start();
+
+    QOsisExporter::writeJsonFile(
+                QString("%1/kvj.jsonc").arg(QDir::tempPath()),
+                BibleSingleton::getInstance()->meta()->reader()->getOsisData(),
+                9
+    );
+
+    qDebug() << "Initializing a compressed json version of a loaded osis xml took" << timer.elapsed() << "milliseconds";
+    timer.invalidate();
+    timer.start();
+    QOsisImporter::importJsonFile(
+                QString("%1/kvj.jsonc").arg(QDir::tempPath()),
+                9
+    );
+    qDebug() << "Importing a compressed json version took" << timer.elapsed() << "milliseconds";
+
+    timer.invalidate();
+    timer.start();
+    QOsisExporter::writeJsonFile(
+                QString("%1/kvj.json").arg(QDir::tempPath()),
+                BibleSingleton::getInstance()->meta()->reader()->getOsisData(),
+                0
+    );
+    qDebug() << "Initializing an uncompressed json version of a loaded osis xml took" << timer.elapsed() << "milliseconds";
+
+    timer.invalidate();
+    timer.start();
+    QOsisImporter::importJsonFile(
+                QString("%1/kvj.json").arg(QDir::tempPath()),
+                0
+    );
+    qDebug() << "Importing an uncompressed json version took" << timer.elapsed() << "milliseconds";
 }
 
 void TestXmlMeta::cleanupTestCase()

@@ -6,13 +6,10 @@
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
 
-#include <qosis.h>
+#include "qosis.h"
 #include "../variables.h"
 
-
-
 using namespace QOSIS;
-
 
 class TestXmlJSON : public QObject {
 

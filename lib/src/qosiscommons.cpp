@@ -42,11 +42,12 @@ QOsisBook::QOsisBook() :
 {
 }
 
-void QOsisBook::addChapter(int chapter)
+QOsisChapter *QOsisBook::addChapter(int chapter)
 {
     QOsisChapter* chap = new QOsisChapter();
     chap->setChapter(chapter);
     this->_data.insert(chapter, chap);
+    return chap;
 }
 
 QOsisChapter *QOsisBook::chapter(int chapterNum)
@@ -76,9 +77,22 @@ int QOsisBook::chapterCount()
 
 
 QOsisStructure::QOsisStructure() :
+    _id(QUuid::createUuid()),
     OsisCommon()
 {
     _order = QList<QString>();
+}
+
+QOsisStructure::QOsisStructure(const QUuid id) :
+    _id(id),
+    OsisCommon()
+{
+    _order = QList<QString>();
+}
+
+const QUuid QOsisStructure::id()
+{
+    return this->_id;
 }
 
 QString QOsisStructure::osisIDWork() const
@@ -130,12 +144,13 @@ void QOsisStructure::setTitle(const QString &title)
     _title = title;
 }
 
-void QOsisStructure::addBook(const QString name)
+QOsisBook *QOsisStructure::addBook(const QString name)
 {
     QOsisBook* book = new QOsisBook();
     book->setName(name);
     _order.append(name);
     this->_data.insert(name, book);
+    return book;
 }
 
 QOsisBook* QOsisStructure::book(QString name)
@@ -183,6 +198,11 @@ int QOsisStructure::verseCount()
 bool QOsisStructure::isEmpty()
 {
     return this->_data.isEmpty();
+}
+
+QHash<QString, QOsisBook *> QOsisStructure::data()
+{
+    return this->_data;
 }
 
 QList<QOsisVerse *> QOsisStructure::find(const QString book, const int chapter, const int verse, int additional)
@@ -275,12 +295,13 @@ QOsisChapter::QOsisChapter() :
 
 }
 
-void QOsisChapter::addVerse(int verseNum, QString verseText)
+QOsisVerse *QOsisChapter::addVerse(int verseNum, QString verseText)
 {
     QOsisVerse* v = new QOsisVerse();
     v->setVerse(verseText);
     v->setVerseNum(verseNum);
     this->_data.insert(verseNum, v);
+    return v;
 }
 
 QOsisVerse* QOsisChapter::verse(int versenum)

@@ -61,6 +61,8 @@ void MainWindow::setup()
     connect(_selection_model, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(selectionChange(QItemSelection,QItemSelection)));
     connect(this->ui->osisTreeView, SIGNAL(clicked(QModelIndex)), this, SLOT(selectionClicked(QModelIndex)));
+    connect(this->ui->btnExpToJson, SIGNAL(clicked()), this, SLOT(exportToJson()));
+    connect(this->ui->btnImpFromJson, SIGNAL(clicked()), this, SLOT(importFromJson()));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -90,6 +92,34 @@ void MainWindow::openText()
         fileNames = dialog.selectedFiles();
     foreach(const QString path, fileNames)
         loadFile(path);
+}
+
+void MainWindow::exportToJson()
+{
+    qDebug() << Q_FUNC_INFO;
+    if (_osis != NULL) {
+        QString fileName = QFileDialog::getSaveFileName(this, tr("Save Osis to JSON"),
+                                   QDir::homePath(),
+                                   tr("JSON (*.json)"));
+        qDebug() << fileName;
+        QOsisExporter* exp = _osis->exporter();
+        exp->setPath(fileName);
+        exp->setCompressionLevel(5);
+        exp->writeJsonFile(_osis->reader()->getOsisData());
+    }
+}
+
+void MainWindow::importFromJson()
+{
+    qDebug() << Q_FUNC_INFO;
+    if (_osis == NULL) {
+        QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Open JSON file"), QDir::homePath(), tr("JSON Files (*.json)"));
+        qDebug() << fileName;
+        QOsisStructure* st = QOsisImporter::importJsonFile(fileName, -1);
+        _osis = new QOsis(fileName, st);
+        this->setupOsisFile(fileName);
+    }
 }
 
 void MainWindow::selectionChange(QItemSelection selected, QItemSelection deselected)

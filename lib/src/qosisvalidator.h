@@ -30,6 +30,18 @@ public:
 
     int validateXml();
 
+    /*!
+     * \brief compare complete structure comparison method
+     *
+     * Compares all components of the QOsisStructure* (books, chapters, verses) to ensure
+     * completeness. Recommended for testing against export/import accuracy.
+     *
+     * \param left
+     * \param right
+     * \return
+     */
+    static bool compare(QOsisStructure* left, QOsisStructure* right);
+
 private:
     void setupSchema(const QString schema = QOSIS::Globals::XML_NAMESPACE);
     QXmlSchema* _schema;

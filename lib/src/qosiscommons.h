@@ -6,6 +6,7 @@
 #include <QtCore/QString>
 #include <QtCore/QHash>
 #include <QtCore/QMap>
+#include <QtCore/QUuid>
 
 #include <QtCore/QXmlStreamAttributes>
 
@@ -71,7 +72,7 @@ public:
 
     void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
 
-    void addVerse(int verseNum, QString verseText);
+    QOsisVerse* addVerse(int verseNum, QString verseText);
     QOsisVerse* verse(int versenum);
 
     int chapter() const;
@@ -95,7 +96,7 @@ public:
     QOsisBook();
 
     void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
-    void addChapter(int chapter);
+    QOsisChapter* addChapter(int chapter);
     QOsisChapter* chapter(int chapterNum);
 
     QString name() const;
@@ -117,6 +118,9 @@ private:
 class QOsisStructure : public OsisCommon {
 public:
     QOsisStructure();
+    QOsisStructure(const QUuid id);
+
+    const QUuid id();
 
     QString osisIDWork() const;
     void setOsisIDWork(const QString &osisIDWork);
@@ -131,7 +135,7 @@ public:
     QString title() const;
     void setTitle(const QString &title);
 
-    void addBook(const QString name);
+    QOsisBook* addBook(const QString name);
     QOsisBook *book(QString name);
 
     int bookCount();
@@ -142,6 +146,8 @@ public:
     int verseCount();
 
     bool isEmpty();
+
+    QHash<QString, QOsisBook*> data();
 
     QList<QOsisVerse*> find(const QString book, const int chapter, const int verse, int additional = 0);
 #ifdef QT_DEBUG
@@ -165,7 +171,7 @@ private:
     QString _osisRefWork;
     QString _title;
     QString _subject;
-
+    QUuid _id;
 
 };
 

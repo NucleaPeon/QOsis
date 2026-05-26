@@ -4,7 +4,7 @@
 // A singleton that reads and contains an entire bible for use within the testing suite
 
 #include <QObject>
-#include <qosis.h>
+#include "qosis.h"
 
 class BibleSingleton;
 class myClass;

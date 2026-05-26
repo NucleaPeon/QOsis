@@ -6,7 +6,7 @@ if (APPLE)
 endif()
 
 project(qosis-tests
-        VERSION 0.0.1.2
+        VERSION 0.0.1.3
         LANGUAGES C CXX
         DESCRIPTION "Tests for ensuring quality of the osis format library"
 )
@@ -56,17 +56,22 @@ list(APPEND TEST_OTHER
     ${CMAKE_CURRENT_LIST_DIR}/qosis-files.qrc
 )
 
+message(STATUS "${CMAKE_CURRENT_LIST_DIR}/../lib/src")
+include_directories(${CMAKE_CURRENT_LIST_DIR}/../lib/src)
+file(GLOB SRC_FILES ${CMAKE_CURRENT_LIST_DIR}/../lib/src/*.cpp)
+file(GLOB HDR_FILES ${CMAKE_CURRENT_LIST_DIR}/../lib/src/*.h)
 
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_LIST_DIR}/test_runner.cpp
     ${TEST_OTHER}
     ${TEST_HEADERS}
     ${TEST_SOURCES}
+    ${SRC_FILES}
+    ${HRD_FILES}
 )
 
-find_package(qosis CONFIG REQUIRED 1.0.0.0)
-target_link_libraries(${PROJECT_NAME} qosis)
-
+#find_package(qosis CONFIG REQUIRED 1.0.0.0)
+#target_link_libraries(${PROJECT_NAME} qosis)
 target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Xml Qt5::XmlPatterns Qt5::Test)
 
 # Uncomment this once we can detect whether package is found and if not, use relative paths instead.

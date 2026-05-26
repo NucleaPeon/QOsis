@@ -2,6 +2,7 @@
 
 void TestXmlReader::initTestCase()
 {
+    this->meta = BibleSingleton::getInstance()->meta();
 }
 
 void TestXmlReader::testConstructors()
