@@ -63,19 +63,42 @@ void Class::ExampleFunction()
     }
 }
 
+void Class::importExportExample()
+{
+    QOsis* osis = new QOsis("/path/to/file.xml");
+    QOsisReader* reader = osis->reader();
+    OsisStructure* osis = reader->getOsisData();
+    // We write to a temporary file
+    const QString newpath = QString("%1/%2.json").arg(QDir::tempPath(), "test");
+    QOsisExporter::writeJsonFile(newpath, st);
+    // We load it back in
+    QOsisStructure* st = QOsisImporter::importJsonFile(newpath);
+    
+    // When exporting and importing with json, you have the option of compressing
+    // the file (1-9 range), <= 0 means uncompressed.
+    // Using JSON to read/write osis books can be up to 40x faster than parsing XML 
+    // (at least through Qt 5.3.2 on OS X with brief testing)
+    
+}
+
 ```
 
 
 TODO List
 =========
 
-[ ] Ensure OSIS Licensing is not infringed with our license and include it in the project
-[ ] GUI has non-functional about and preferences windows, only is used to read a file.
-    [ ] Include export and import functions
-[ ] CLI has not been worked on, so is non-functional. Make it functional.
-[ ] Add documentation and instructions on how to build them
-[ ] Maybe rename test filenames from test_xml_ to test_
-[ ] Have a test class that only measures benchmarks of different functions (ie: import,export,parse xml)
+    [ ] Ensure OSIS Licensing is not infringed with our license and include it in the project
+    
+    [ ] GUI has non-functional about and preferences windows, only is used to read a file.
+        [ ] Include export and import functions
+        
+    [ ] CLI has not been worked on, so is non-functional. Make it functional.
+    
+    [ ] Add documentation and instructions on how to build them
+    
+    [ ] Maybe rename test filenames from test_xml_ to test_
+    
+    [ ] Have a test class that only measures benchmarks of different functions (ie: import,export,parse xml)
 
 
 License
