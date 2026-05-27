@@ -37,8 +37,9 @@ void QOsisCommons::processPath()
 }
 
 
-QOsisBook::QOsisBook() :
-    OsisCommon()
+QOsisBook::QOsisBook(QOsisStructure* parent) :
+    OsisCommon(),
+    _parent(parent)
 {
 }
 
@@ -256,8 +257,9 @@ const QDebug operator<<(QDebug dbg,  QOsisStructure &structure)
 #endif
 
 
-QOsisVerse::QOsisVerse() :
-    OsisCommon()
+QOsisVerse::QOsisVerse(QOsisChapter *parent) :
+    OsisCommon(),
+    _parent(parent)
 {
 
 }
@@ -289,8 +291,9 @@ int QOsisVerse::characterCount()
 
 
 
-QOsisChapter::QOsisChapter() :
-    OsisCommon()
+QOsisChapter::QOsisChapter(QOsisBook *parent) :
+    OsisCommon(),
+    _parent(parent)
 {
 
 }

@@ -18,6 +18,11 @@
 
 namespace QOSIS {
 
+class QOsisStructure;
+class QOsisBook;
+class QOsisChapter;
+class QOsisVerse;
+
 class QOsisCommons {
 public:
     QOsisCommons(const QString path);
@@ -43,7 +48,7 @@ public:
 
 class QOsisVerse : public OsisCommon {
 public:
-    QOsisVerse();
+    QOsisVerse(QOsisChapter *parent = 0);
 
     void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
 
@@ -56,6 +61,8 @@ public:
 
     int characterCount();
 
+    QOsisChapter* parent() { return _parent; }
+
 #ifdef QT_DEBUG
     const friend QDebug operator<<(QDebug dbg,  QOsisVerse &verse);
 #endif
@@ -64,11 +71,12 @@ public:
 private:
     QString _verse;
     int _versenum;
+    QOsisChapter *_parent;
 };
 
 class QOsisChapter : public OsisCommon  {
 public:
-    QOsisChapter();
+    QOsisChapter(QOsisBook* parent = 0);
 
     void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
 
@@ -81,6 +89,8 @@ public:
     int verseCount();
     QList<int> verses();
 
+    QOsisBook* parent() { return _parent; }
+
 #ifdef QT_DEBUG
     const friend QDebug operator<<(QDebug dbg,  QOsisChapter &chapter);
 #endif
@@ -89,11 +99,12 @@ public:
 private:
     QMap<int, QOsisVerse*> _data;
     int _chapter;
+    QOsisBook *_parent;
 };
 
 class QOsisBook : public OsisCommon {
 public:
-    QOsisBook();
+    QOsisBook(QOsisStructure *parent = 0);
 
     void consumeAttributes(QXmlStreamAttributes attrs) { Q_UNUSED(attrs) }
     QOsisChapter* addChapter(int chapter);
@@ -105,6 +116,9 @@ public:
     QList<int> chapters();
 
     int chapterCount();
+
+    QOsisStructure* parent() { return _parent; }
+
 #ifdef QT_DEBUG
     const friend QDebug operator<<(QDebug dbg,  QOsisBook &book);
 #endif
@@ -112,6 +126,7 @@ public:
 private:
     QString _name;
     QMap<int, QOsisChapter*> _data;
+    QOsisStructure* _parent;
 
 };
 

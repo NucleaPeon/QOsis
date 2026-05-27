@@ -65,6 +65,19 @@ void TestXmlMeta::testLoadingOsisFile()
     qDebug() << "Importing an uncompressed json version took" << timer.elapsed() << "milliseconds";
 }
 
+void TestXmlMeta::testParentage()
+{
+    QOsisStructure* st = BibleSingleton::getInstance()->osis();
+    QOsisBook* book = st->books().at(0);
+    QOsisChapter* chap = book->chapters.at(0);
+    QOsisVerse* verse = chap->verses().at(0);
+
+    QVERIFY(verse->parent() == chap);
+    QVERIFY(chap->parent() == book);
+    QVERIFY(book->parent() == st);
+
+}
+
 void TestXmlMeta::cleanupTestCase()
 {
     delete this->meta;
