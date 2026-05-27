@@ -18,6 +18,7 @@ private slots:
     void initTestCase();
     void testGetters();
     void testLoadingOsisFile();
+    void testParentage();
     void cleanupTestCase();
 
 private:

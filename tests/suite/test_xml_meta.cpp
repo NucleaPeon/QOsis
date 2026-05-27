@@ -68,9 +68,9 @@ void TestXmlMeta::testLoadingOsisFile()
 void TestXmlMeta::testParentage()
 {
     QOsisStructure* st = BibleSingleton::getInstance()->osis();
-    QOsisBook* book = st->books().at(0);
-    QOsisChapter* chap = book->chapters.at(0);
-    QOsisVerse* verse = chap->verses().at(0);
+    QOsisBook* book = st->book(st->books().at(0));
+    QOsisChapter* chap = book->chapter(1);
+    QOsisVerse* verse = chap->verse(1);
 
     QVERIFY(verse->parent() == chap);
     QVERIFY(chap->parent() == book);
