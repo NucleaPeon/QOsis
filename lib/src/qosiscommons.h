@@ -12,9 +12,7 @@
 
 #include "qosisglobals.h"
 
-#ifdef QT_DEBUG
 #include <QtCore/QDebug>
-#endif
 
 namespace QOSIS {
 
@@ -110,7 +108,7 @@ public:
     QOsisChapter* addChapter(int chapter);
     QOsisChapter* chapter(int chapterNum);
 
-    QString name() const;
+    const QString name();
     void setName(const QString &name);
 
     QList<int> chapters();
@@ -135,7 +133,7 @@ public:
     QOsisStructure();
     QOsisStructure(const QUuid id);
 
-    const QUuid id();
+    const QUuid id() { return _id; }
 
     QString osisIDWork() const;
     void setOsisIDWork(const QString &osisIDWork);

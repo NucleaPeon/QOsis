@@ -39,7 +39,8 @@ void QOsisCommons::processPath()
 
 QOsisBook::QOsisBook(QOsisStructure* parent) :
     OsisCommon(),
-    _parent(parent)
+    _parent(parent),
+    _name("")
 {
 }
 
@@ -55,13 +56,14 @@ QOsisChapter *QOsisBook::chapter(int chapterNum)
 {
     return this->_data.value(chapterNum);
 }
-QString QOsisBook::name() const
+const QString QOsisBook::name()
 {
     return _name;
 }
 
 void QOsisBook::setName(const QString &name)
 {
+    qDebug() << Q_FUNC_INFO;
     _name = name;
 }
 
@@ -89,11 +91,6 @@ QOsisStructure::QOsisStructure(const QUuid id) :
     OsisCommon()
 {
     _order = QList<QString>();
-}
-
-const QUuid QOsisStructure::id()
-{
-    return this->_id;
 }
 
 QString QOsisStructure::osisIDWork() const

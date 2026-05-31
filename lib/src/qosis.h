@@ -25,6 +25,10 @@ class QOsisReader;
 class QOsisWriter;
 class QOsisExporter;
 class QOsisImporter;
+class QOsisBook;
+class QOsisChapter;
+class QOsisVerse;
+class QOsisStructure;
 
 }
 
