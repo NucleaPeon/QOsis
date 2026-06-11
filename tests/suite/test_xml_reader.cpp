@@ -45,9 +45,13 @@ void TestXmlReader::testOrdering()
     QOsisReader* reader = BibleSingleton::getInstance()->meta()->reader();
     QOsisBook* book;
     foreach(const QString bookname, reader->getOsisData()->books()) {
+        // This confirms that our numbering starts at readable, concrete numbers (not 0)
         book = reader->getOsisData()->book(bookname);
         QVERIFY(book->chapter(1)->verseCount() > 0);
         QVERIFY(book->chapter(0) == NULL);
+        QOsisChapter* c = book->chapter(1);
+        QVERIFY(c->verse(1) != NULL);
+        QVERIFY(c->verse(0) == NULL);
     }
 }
 
