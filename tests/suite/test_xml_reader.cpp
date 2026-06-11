@@ -18,7 +18,6 @@ void TestXmlReader::testReadingFile()
 {
     QOsisReader* reader = BibleSingleton::getInstance()->meta()->reader();
     QVERIFY(reader != NULL);
-    qDebug() << reader->reader()->hasError() << reader->reader()->errorString();
     QVERIFY(! reader->reader()->hasError());
     QOsisStructure* data = BibleSingleton::getInstance()->osis();
     QVERIFY(data->bookCount() > 0);
