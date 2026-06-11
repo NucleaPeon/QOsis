@@ -97,6 +97,9 @@ TODO List
     [ ] Add documentation and instructions on how to build them
     
     [ ] Maybe rename test filenames from test_xml_ to test_
+
+    [ ] Exporting into JSON loses some accuracy data (such as book ordering, chapter and verse numbering
+                                                      and we assume based on array index instead)
     
     [ ] Have a test class that only measures benchmarks of different functions (ie: import,export,parse xml)
 

@@ -64,11 +64,11 @@ QOsisStructure *QOsisImporter::processJson(QJsonDocument doc)
         QOsisBook* bookAdded = st->addBook(bookTitle);
         // Chapters
         for (i=0; i<chapters.size(); ++i) {
-            QOsisChapter* chapAdded = bookAdded->addChapter(i);
+            QOsisChapter* chapAdded = bookAdded->addChapter(i+1);
             const QJsonArray verses = chapters.at(i).toArray();
             // Verses
             for (j=0; j<verses.size(); ++j) {
-                chapAdded->addVerse(j, verses.at(j).toString());
+                chapAdded->addVerse(j, verses.at(j+1).toString());
             }
         }
     }
