@@ -210,7 +210,11 @@ QList<QOsisVerse *> QOsisStructure::find(const QString book, const int chapter, 
         additional = 0;
     QOsisBook* osisbook = this->book(book);
     QOsisChapter* osischap = osisbook->chapter(chapter);
-    for(int i = verse; i <= additional; ++i) {
+    const int count = osischap->verseCount();
+    if (verse + additional > count) {
+        additional = count-verse;
+    }
+    for(int i = verse; i <= count; ++i) {
         verses.append(osischap->verse(i));
     }
 
