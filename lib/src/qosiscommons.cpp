@@ -76,6 +76,11 @@ int QOsisBook::chapterCount()
     return this->_data.keys().count();
 }
 
+const int QOsisBook::position()
+{
+    return this->parent()->bookPosition(this->_name);
+}
+
 
 
 QOsisStructure::QOsisStructure() :
@@ -153,6 +158,11 @@ QOsisBook *QOsisStructure::addBook(const QString name)
 QOsisBook* QOsisStructure::book(QString name)
 {
     return this->_data.value(name);
+}
+
+const int QOsisStructure::bookPosition(const QString name)
+{
+    return _order.indexOf(name);
 }
 
 int QOsisStructure::bookCount()
