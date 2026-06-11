@@ -68,7 +68,7 @@ QOsisStructure *QOsisImporter::processJson(QJsonDocument doc)
             const QJsonArray verses = chapters.at(i).toArray();
             // Verses
             for (j=0; j<verses.size(); ++j) {
-                chapAdded->addVerse(j, verses.at(j+1).toString());
+                chapAdded->addVerse(j+1, verses.at(j).toString());
             }
         }
     }
