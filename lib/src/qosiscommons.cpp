@@ -309,7 +309,7 @@ QOsisVerse *QOsisChapter::addVerse(int verseNum, QString verseText)
 
 QOsisVerse* QOsisChapter::verse(int versenum)
 {
-    return this->_data.value(versenum);
+    return this->_data.value(versenum, NULL);
 }
 int QOsisChapter::chapter() const
 {
