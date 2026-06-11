@@ -114,6 +114,7 @@ public:
     QList<int> chapters();
 
     int chapterCount();
+    int order();
 
     QOsisStructure* parent() { return _parent; }
 
@@ -151,6 +152,7 @@ public:
     QOsisBook* addBook(const QString name);
     QOsisBook *book(QString name);
 
+    int bookOrder(const QString name);
     int bookCount();
     QList<QString> books() const;
 
