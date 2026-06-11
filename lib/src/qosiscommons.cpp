@@ -54,7 +54,7 @@ QOsisChapter *QOsisBook::addChapter(int chapter)
 
 QOsisChapter *QOsisBook::chapter(int chapterNum)
 {
-    return this->_data.value(chapterNum);
+    return this->_data.value(chapterNum, NULL);
 }
 const QString QOsisBook::name()
 {
@@ -63,7 +63,6 @@ const QString QOsisBook::name()
 
 void QOsisBook::setName(const QString &name)
 {
-    qDebug() << Q_FUNC_INFO;
     _name = name;
 }
 

@@ -40,6 +40,17 @@ void TestXmlReader::testDebug()
 
 }
 
+void TestXmlReader::testOrdering()
+{
+    QOsisReader* reader = BibleSingleton::getInstance()->meta()->reader();
+    QOsisBook* book;
+    foreach(const QString bookname, reader->getOsisData()->books()) {
+        book = reader->getOsisData()->book(bookname);
+        QVERIFY(book->chapter(1)->verseCount() > 0);
+        QVERIFY(book->chapter(0) == NULL);
+    }
+}
+
 void TestXmlReader::cleanupTestCase()
 {
 }

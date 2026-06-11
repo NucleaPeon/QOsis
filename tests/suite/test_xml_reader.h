@@ -23,6 +23,7 @@ private slots:
     void testConstructors();
     void testReadingFile();
     void testDebug();
+    void testOrdering();
     void cleanupTestCase();
 
 private:
