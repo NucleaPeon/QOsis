@@ -4,8 +4,10 @@
 #include "qosisglobals.h"
 #include "qosiscommons.h"
 
+#if QT_VERSION < 6
 #include <QtXmlPatterns/QXmlSchema>
 #include <QtXmlPatterns/QXmlSchemaValidator>
+#endif
 
 
 namespace QOSIS {
@@ -44,7 +46,9 @@ public:
 
 private:
     void setupSchema(const QString schema = QOSIS::Globals::XML_NAMESPACE);
+    #if QT_VERSION < 6
     QXmlSchema* _schema;
+    #endif
 };
 
 }

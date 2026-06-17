@@ -1,7 +1,11 @@
 #ifndef QOSISWRITER_H
 #define QOSISWRITER_H
-
+#include <QtCore/QtGlobal>
+#if QT_VERSION < 6
+#include <QtXmlPatterns/QXmlSchema>
 #include <QtXmlPatterns/QXmlSchemaValidator>
+#endif
+
 #include <QtCore/QXmlStreamReader>
 #include <QtCore/QXmlStreamWriter>
 

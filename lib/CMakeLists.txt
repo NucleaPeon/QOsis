@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(qosis
-        VERSION 1.0.15.2
+        VERSION 2.0.0.0
         LANGUAGES C CXX
         DESCRIPTION "OSIS (Open Scriptural Information Standard™) Library"
 )
@@ -15,10 +15,20 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt5 REQUIRED
+set(QT_DEFAULT_MAJOR_VERSION "6" CACHE STRING "Qt Version defaults to 6 (latest)")
+
+
+find_package(Qt${QT_DEFAULT_MAJOR_VERSION} NAMES Qt5 Qt6 REQUIRED COMPONENTS
     Core
     Xml
 )
+
+if(${QT_DEFAULT_MAJOR_VERSION} STREQUAL "6")
+    find_package(Qt6 REQUIRED COMPONENTS
+        Core5Compat
+    )
+endif()
+
 
 set(PACKAGE_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/qosis.h
@@ -59,7 +69,18 @@ add_library(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ..)
-target_link_libraries(${PROJECT_NAME} Qt5::Xml Qt5::Core)
+
+target_link_libraries(${PROJECT_NAME}
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Xml
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Core
+)
+
+if(${QT_DEFAULT_MAJOR_VERSION} STREQUAL "6")
+    target_link_libraries(${PROJECT_NAME}
+        Qt6::Core5Compat
+    )
+endif()
+
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION}
     SOVERSION 1

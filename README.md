@@ -27,14 +27,22 @@ QOsis is broken down into three components:
 
 (Only the library and the gui work right now)
 
+
+**Important Note:** QtXmlPatterns does not exist in Qt6. This functionality may be removed in QOsis or validated
+through a third party library in the future. In any case, it'd be simpler to move over both qt5 and qt6 to a third
+party xml handler.
+
 Installation Procedure
 ======================
+
+With Qt6 available, we now allow setting of major qt versions. Default is 6, so to specify older versions, call with
+``-DQT_DEFAULT_MAJOR_VERSION=5``. Otherwise if using latest, this can be omitted.
 
 Depending on which component you want to install, navigate to that directory, go into the ``build/``
 directory and run::
 
 ```
-    cmake ..
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/ -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DQT_DEFAULT_MAJOR_VERSION=5 ..
     make -j
     sudo make install
 ```

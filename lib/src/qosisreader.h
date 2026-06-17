@@ -1,20 +1,22 @@
 #ifndef QOSISREADER_H
 #define QOSISREADER_H
 
-#include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtCore/QXmlStreamReader>
 #include <QtCore/QXmlStreamWriter>
 #include <QtCore/QByteArray>
 #include <QtCore/QFile>
 #include <QtCore/QString>
-#include <QtCore/QStringRef>
 
+#if QT_VERSION < 6
+#include <QtCore/QStringRef>
+#else
+#include <QtCore5Compat/QStringRef>
+#endif
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonValue>
 #include <QtCore/QJsonArray>
 #include <QtCore/QXmlStreamReader>
-
 
 #include "qosis.h"
 #include "qosiscommons.h"
