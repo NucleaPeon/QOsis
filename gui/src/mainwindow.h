@@ -1,16 +1,20 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QtCore/QtGlobal>
 #include <QtCore/QHash>
+#include <QtGui/QStandardItemModel>
+#include <QtGui/QCloseEvent>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QStatusBar>
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QtWidgets/QAction>
+#else
+#include <QtGui/QAction>
+#endif
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QTreeView>
-#include <QtGui/QStandardItemModel>
-#include <QtGui/QCloseEvent>
 
 #include "about.h"
 #include "preferences.h"

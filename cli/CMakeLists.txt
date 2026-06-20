@@ -7,6 +7,8 @@ project(qosis-cli
 
 message(STATUS "Building OSIS CLI...")
 
+# TODO
+
 # Immediately set the version.h header
 configure_file(${CMAKE_CURRENT_LIST_DIR}/version.h.in
     ${CMAKE_CURRENT_LIST_DIR}/version.h @ONLY)

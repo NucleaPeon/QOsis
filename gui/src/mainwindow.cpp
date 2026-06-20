@@ -103,9 +103,7 @@ void MainWindow::exportToJson()
                                    tr("JSON (*.json)"));
         qDebug() << fileName;
         QOsisExporter* exp = _osis->exporter();
-        exp->setPath(fileName);
-        exp->setCompressionLevel(5);
-        exp->writeJsonFile(_osis->reader()->getOsisData());
+        QOsisExporter::writeJsonFile(fileName, _osis->reader()->getOsisData());
     }
 }
 
@@ -116,6 +114,8 @@ void MainWindow::importFromJson()
         QString fileName = QFileDialog::getOpenFileName(this,
             tr("Open JSON file"), QDir::homePath(), tr("JSON Files (*.json)"));
         qDebug() << fileName;
+        if (fileName.isEmpty())
+            return;
         QOsisStructure* st = QOsisImporter::importJsonFile(fileName, -1);
         _osis = new QOsis(fileName, st);
         this->setupOsisFile(fileName);

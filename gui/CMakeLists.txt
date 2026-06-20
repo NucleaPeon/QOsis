@@ -13,10 +13,10 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-message(STATUS "Building OSIS GUI in ${CMAKE_CURRENT_LIST_DIR}...")
+set(QT_DEFAULT_MAJOR_VERSION "6" CACHE STRING "Qt Version defaults to 6 (latest)")
 
 
-find_package(Qt5 REQUIRED
+find_package(Qt${QT_DEFAULT_MAJOR_VERSION} NAMES Qt5 Qt6 REQUIRED COMPONENTS
     Core
     Gui
     Widgets
@@ -51,7 +51,17 @@ list(APPEND APP_RES)
 
 list(APPEND APP_OTHER)
 
-find_package(qosis CONFIG REQUIRED 1.0.11)
+if(APPLE)
+        find_package(Qt${QT_DEFAULT_MAJOR_VERSION}::MacExtras)
+endif()
+
+if(${QT_DEFAULT_MAJOR_VERSION} STREQUAL "6")
+    find_package(Qt6 REQUIRED COMPONENTS
+        Core5Compat
+    )
+endif()
+
+find_package(qosis CONFIG REQUIRED 2)
 
 if (APPLE)
     set(APP_ICON "${MACOSX_BUNDLE_ICON_FILE}")
@@ -107,19 +117,33 @@ endif()
 
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Test)
+target_link_libraries(${PROJECT_NAME}
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Core
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Gui
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Widgets
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Test
+)
+
+if(${QT_DEFAULT_MAJOR_VERSION} STREQUAL "6")
+    target_link_libraries(${PROJECT_NAME}
+        Qt6::Core5Compat
+    )
+endif()
+
+
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE .. )
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
 target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
 target_link_libraries(${PROJECT_NAME} qosis)
 
 if(APPLE)
-        find_package(Qt5 REQUIRED MacExtras)
-        target_link_libraries(${PROJECT_NAME} Qt5::MacExtras)
+        target_link_libraries(${PROJECT_NAME}
+                Qt${QT_DEFAULT_MAJOR_VERSION}::MacExtras
+        )
 elseif(MSVC)
-        find_package(Qt5 HINTS "$ENV{QT5_DIR}" COMPONENTS Core Quick REQUIRED)
+        find_package(Qt${QT_DEFAULT_MAJOR_VERSION} HINTS "$ENV{QT5_DIR}" COMPONENTS Core Quick REQUIRED)
         set(CMAKE_PREFIX_PATH "C:\\Qt\\5.3.1\\5.3\\msvc2013_opengl")
         set(Qt5_DIR "C:/Qt/Qt5.3.2/5.3/msvc2013_64_opengl/")
-        find_package(Qt5 COMPONENTS WinExtras REQUIRED)
-        target_link_libraries(${PROJECT_NAME} Qt5::WinExtras)
+        find_package(Qt${QT_DEFAULT_MAJOR_VERSION} COMPONENTS WinExtras REQUIRED)
+        target_link_libraries(${PROJECT_NAME} Qt${QT_DEFAULT_MAJOR_VERSION}::WinExtras)
 endif()
