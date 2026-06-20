@@ -1,10 +1,12 @@
 #ifndef QOSISVALIDATOR_H
 #define QOSISVALIDATOR_H
 
+#include <QtCore/QtGlobal>
+
 #include "qosisglobals.h"
 #include "qosiscommons.h"
 
-#if QT_VERSION < 6
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QtXmlPatterns/QXmlSchema>
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #endif

@@ -71,7 +71,7 @@ void QOsisReader::parseXml()
     _reader->setNamespaceProcessing(false);
     while(! _reader->atEnd()) {
         _reader->readNext();
-        #if QT_VERSION < 6
+        #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
         processXml(_reader->name());
         #else
         QString _name = _reader->name().toString();

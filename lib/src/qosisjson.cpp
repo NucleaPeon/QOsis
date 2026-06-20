@@ -41,7 +41,7 @@ void QOsisJson::process(QOsisReader* reader)
 QJsonObject QOsisJson::store(QXmlStreamReader *reader, QList<QStringRef> tags)
 {
     QJsonObject obj;
-    #if QT_VERSION < 6
+    #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     const QStringRef name = reader->name();
     #else
     QString _name = reader->name().toString();
