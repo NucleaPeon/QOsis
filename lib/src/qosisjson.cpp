@@ -43,10 +43,13 @@ QJsonObject QOsisJson::store(QXmlStreamReader *reader, QList<QStringRef> tags)
     QJsonObject obj;
     #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     const QStringRef name = reader->name();
+    qDebug() << "<Qt6";
     #else
     QString _name = reader->name().toString();
     QStringRef name = QStringRef(&_name);
+    qDebug() << "Qt6";
     #endif
+    qDebug() << Q_FUNC_INFO << name;
     tags.push_front(name);
 
     if (name == "osis") {

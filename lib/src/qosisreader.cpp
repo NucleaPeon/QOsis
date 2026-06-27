@@ -71,14 +71,17 @@ void QOsisReader::parseXml()
     _reader->setNamespaceProcessing(false);
     while(! _reader->atEnd()) {
         _reader->readNext();
-        #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-        processXml(_reader->name());
-        #else
-        QString _name = _reader->name().toString();
+        const QString _name = _reader->name().toString();
+        if (_name == "title") {
+            foreach(QXmlStreamAttribute attr, _reader->attributes()) {
+                if (attr.name() == "osisID") {
+                    QString val = attr.value().toString();
+                    qDebug() << val;
+                }
+            };
+        }
         QStringRef name = QStringRef(&_name);
-        processXml(QStringRef(name));
-        #endif
-
+        processXml(name);
     }
 }
 

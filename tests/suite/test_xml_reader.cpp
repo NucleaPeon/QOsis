@@ -20,6 +20,8 @@ void TestXmlReader::testReadingFile()
     QVERIFY(reader != NULL);
     QVERIFY(! reader->reader()->hasError());
     QOsisStructure* data = BibleSingleton::getInstance()->osis();
+    QVERIFY(data->title() != QString());
+    QVERIFY(data->title() == "King James Version");
     QVERIFY(data->bookCount() > 0);
     QVERIFY(data->chapterCount() > 0);
     QVERIFY(data->verseCount() > 0);

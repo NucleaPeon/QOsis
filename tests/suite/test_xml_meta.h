@@ -4,6 +4,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
 #include <QtTest/QTest>
+#include <QtCore/QElapsedTimer>
 
 #include "qosis.h"
 #include "../singletonbook.h"

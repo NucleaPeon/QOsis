@@ -7,9 +7,10 @@
 #include <QtTest/QTest>
 #include <QtCore/QUrl>
 #include <QtCore/QBuffer>
-
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include <QtXmlPatterns/QXmlSchemaValidator>
 #include <QtXmlPatterns/QXmlSchema>
+#endif
 
 #include "qosis.h"
 #include "../singletonbook.h"

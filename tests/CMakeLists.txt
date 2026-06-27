@@ -6,7 +6,7 @@ if (APPLE)
 endif()
 
 project(qosis-tests
-        VERSION 0.0.1.3
+        VERSION 0.0.2.0
         LANGUAGES C CXX
         DESCRIPTION "Tests for ensuring quality of the osis format library"
 )
@@ -14,12 +14,24 @@ project(qosis-tests
 include(GNUInstallDirs)
 include(CTest)
 
-find_package(Qt5 REQUIRED
+set(QT_DEFAULT_MAJOR_VERSION "6" CACHE STRING "Qt Version defaults to 6 (latest)")
+
+find_package(Qt${QT_DEFAULT_MAJOR_VERSION} NAMES Qt5 Qt6 REQUIRED COMPONENTS
     Core
     Xml
-    XmlPatterns
     Test
 )
+
+if(${QT_DEFAULT_MAJOR_VERSION} STREQUAL "6")
+    find_package(Qt6 REQUIRED COMPONENTS
+        Core5Compat
+    )
+else()
+    find_package(Qt5 REQUIRED COMPONENTS
+        XmlPatterns
+    )
+endif()
+
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -72,7 +84,20 @@ add_executable(${PROJECT_NAME}
 
 #find_package(qosis CONFIG REQUIRED 1.0.0.0)
 #target_link_libraries(${PROJECT_NAME} qosis)
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Xml Qt5::XmlPatterns Qt5::Test)
+target_link_libraries(${PROJECT_NAME}
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Core
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Xml
+    Qt${QT_DEFAULT_MAJOR_VERSION}::Test
+)
+if(${QT_DEFAULT_MAJOR_VERSION} STREQUAL "6")
+    target_link_libraries(${PROJECT_NAME}
+        Qt6::Core5Compat
+    )
+else()
+    target_link_libraries(${PROJECT_NAME}
+        Qt5::XmlPatterns
+    )
+endif()
 
 # Uncomment this once we can detect whether package is found and if not, use relative paths instead.
 

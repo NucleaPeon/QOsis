@@ -14,13 +14,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-	delete this->aboutAction;
-    delete this->aboutWindow;
-    delete this->preferencesAction;
-    delete this->preferencesWindow;
-    delete this->mainMenu;
-    delete this->mainMenuBar;
-    delete this->statusBar;
     delete ui;
 }
 
@@ -168,6 +161,8 @@ void MainWindow::setupOsisFile(const QString path)
 {
     QOsisReader* reader = _osis->reader();
     QOsisStructure* structure = reader->getOsisData();
+    this->ui->lblTitle->setText(structure->title());
+    qDebug() << "Is title set to " << structure->title();
     foreach(const QString str, structure->books()) {
         QStandardItem* item = new QStandardItem(Ui::ICON_BOOK, str);
         item->setEditable(false);

@@ -12,6 +12,7 @@ void TestXmlValidator::initTestCase()
 
 void TestXmlValidator::testSchemaValidation()
 {
+    #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     QXmlSchema schema;
     QFile* f = new QFile("://osisCore.2.1.1.xsd");
     f->open(QIODevice::ReadOnly);
@@ -30,6 +31,7 @@ void TestXmlValidator::testSchemaValidation()
 
     QXmlSchemaValidator validator(schema);
     QVERIFY(validator.validate(&buffer));
+    #endif
 }
 
 void TestXmlValidator::cleanupTestCase()

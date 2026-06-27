@@ -55,11 +55,18 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>339</width>
-                  <height>532</height>
+                  <width>366</width>
+                  <height>530</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_9">
+                 <item>
+                  <widget class="QLabel" name="lblTitle">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QTreeView" name="osisTreeView">
                    <property name="headerHidden">
@@ -79,7 +86,7 @@
                    <item>
                     <spacer name="horizontalSpacer">
                      <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                      <enum>Qt::Orientation::Horizontal</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
@@ -132,8 +139,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>341</width>
-                <height>534</height>
+                <width>368</width>
+                <height>532</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -168,7 +175,7 @@
         <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
